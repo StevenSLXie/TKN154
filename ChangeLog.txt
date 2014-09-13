@@ -1,0 +1,8 @@
+This log keeps tracks of all the changes made on the tinyos system stack. 
+Every change should follow this format:
+<ID>:<directory>+<file>: lines: from xx to xx: (optinal) reason: made by whom: date
+
+1: /opt/tinyos-2.1.2/tos/lib/mac/tkn154/TKN154_PIB.h: 187: from 3 to 0: we do not need retry feature: Shuanglong: 31-Aug-2014
+
+
+
