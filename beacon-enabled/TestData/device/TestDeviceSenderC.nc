@@ -42,7 +42,7 @@ module TestDeviceSenderC
   uses {
     interface Boot;
 	interface SplitControl as Control;
-	//interface Receive;
+	interface Timer<TMilli> as TimerSendPac;
     interface AMSend;
 	
     interface MCPS_DATA;
@@ -122,6 +122,7 @@ module TestDeviceSenderC
                            NULL,                   // PANDescriptorList
                            0                       // security
                         );
+	
   }
 
   event message_t* MLME_BEACON_NOTIFY.indication (message_t* frame)
@@ -177,9 +178,15 @@ module TestDeviceSenderC
           &m_PANDescriptor.CoordAddress,  // DstAddr,
           NULL                            // security
           );
-      post packetSendTask(); 
+      //post packetSendTask();
+	  call TimerSendPac.startPeriodic(10);
+	  
     } else
       startApp();
+  }
+  
+  event void TimerSendPac.fired(){
+	 post packetSendTask();
   }
   
   void sendToSerial(uint16_t numOfTransmission, uint16_t numOfSuccess) {
@@ -205,19 +212,27 @@ module TestDeviceSenderC
 
   task void packetSendTask()
   {
-    if (!m_wasScanSuccessful)
+    if (!m_wasScanSuccessful){
+	  call Leds.led0On();
+	  call TimerSendPac.stop();
+	  startApp();
       return;
+	  }
     else if (call MCPS_DATA.request  (
           &m_frame,                         // frame,
           m_payloadLen,                     // payloadLength,
           0,                                // msduHandle,
           TX_OPTIONS_ACK // TxOptions,
-          ) != IEEE154_SUCCESS)
+          ) != IEEE154_SUCCESS){
       call Leds.led0On();
-	  
-	// whether send or not, send the PSR to the serial port.
-	m_numOfTransmission++;
-	sendToSerial(m_numOfTransmission,m_numOfSuccess);
+	  //call TimerSendPac.stop();
+	  //startApp();
+	}
+	else{
+		call Leds.led0Off();
+		m_numOfTransmission++;
+	}
+
 	
   }
 
@@ -230,13 +245,17 @@ module TestDeviceSenderC
   {
     if (status == IEEE154_SUCCESS ) {
 	  m_numOfSuccess++;
-	  if(m_ledCount++>=20){
-		call Leds.led1Toggle();
-		m_ledCount = 0;
-	  }
-
+	  call Leds.led1Toggle();
+	  sendToSerial(m_numOfTransmission,m_numOfSuccess);
+	  //m_ledCount = 0;
+	
     }
-    post packetSendTask(); 
+	//else{
+	//	call Leds.led0On();
+	//	call TimerSendPac.stop();
+	//	startApp();
+	//}
+    
   }
 
   event void MLME_SYNC_LOSS.indication(
@@ -249,6 +268,9 @@ module TestDeviceSenderC
     m_wasScanSuccessful = FALSE;
     call Leds.led1Off();
     call Leds.led2Off();
+	call Leds.led0On();
+	call TimerSendPac.stop();
+	startApp();
   }
 
   event message_t* MCPS_DATA.indication (message_t* frame)

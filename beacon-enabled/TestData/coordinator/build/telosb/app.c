@@ -34749,7 +34749,7 @@ static void PibP__resetAttributesToDefault(void )
   PibP__m_pib.macGTSPermit = TRUE;
   PibP__m_pib.macMaxBE = 5;
   PibP__m_pib.macMaxCSMABackoffs = 4;
-  PibP__m_pib.macMaxFrameRetries = 3;
+  PibP__m_pib.macMaxFrameRetries = 0;
   PibP__m_pib.macMinBE = 3;
   PibP__m_pib.macPANId = 0xFFFF;
   PibP__m_pib.macPromiscuousMode = FALSE;
