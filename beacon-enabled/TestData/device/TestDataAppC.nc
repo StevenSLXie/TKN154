@@ -40,12 +40,14 @@ configuration TestDataAppC
 } implementation {
   components MainC, LedsC, Ieee802154BeaconEnabledC as MAC;
   components new TimerMilliC() as TimerSendPac;	
+  components new TimerMilliC() as TimerChgPrd;
   components TestDeviceSenderC as App;
   components SerialActiveMessageC as AM;
   
   App.Boot -> MainC.Boot;
   App.Control -> AM;
   App.TimerSendPac -> TimerSendPac;
+  App.TimerChgPrd -> TimerChgPrd;
   App.AMSend -> AM.AMSend[AM_TEST_SERIAL_MSG];
   App.SerialPacket -> AM;
   

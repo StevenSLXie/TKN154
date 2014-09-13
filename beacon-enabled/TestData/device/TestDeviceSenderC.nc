@@ -43,6 +43,7 @@ module TestDeviceSenderC
     interface Boot;
 	interface SplitControl as Control;
 	interface Timer<TMilli> as TimerSendPac;
+	interface Timer<TMilli> as TimerChgPrd;
     interface AMSend;
 	
     interface MCPS_DATA;
@@ -178,8 +179,10 @@ module TestDeviceSenderC
           &m_PANDescriptor.CoordAddress,  // DstAddr,
           NULL                            // security
           );
-      //post packetSendTask();
-	  call TimerSendPac.startPeriodic(10);
+      // Initilize the packet transmission timer
+	  call TimerSendPac.startPeriodic(20);
+	  // Initialize the transmission rate adjustment algorithm
+	  call TimerChgPrd.startPeriodic(10000);
 	  
     } else
       startApp();
@@ -187,6 +190,19 @@ module TestDeviceSenderC
   
   event void TimerSendPac.fired(){
 	 post packetSendTask();
+  }
+  
+  event void TimerChgPrd.fired(){
+	call TimerSendPac.stop();
+	 
+	m_PSR = (float)m_numOfSuccess/(float)m_numOfTransmission;
+	
+	if (m_PSR > 0.9)
+		call TimerSendPac.startPeriodic(300);
+    else
+		call TimerSendPac.startPeriodic(300);
+	m_numOfSuccess = 0;
+	m_numOfTransmission = 0;
   }
   
   void sendToSerial(uint16_t numOfTransmission, uint16_t numOfSuccess) {
@@ -225,8 +241,7 @@ module TestDeviceSenderC
           TX_OPTIONS_ACK // TxOptions,
           ) != IEEE154_SUCCESS){
       call Leds.led0On();
-	  //call TimerSendPac.stop();
-	  //startApp();
+	
 	}
 	else{
 		call Leds.led0Off();
@@ -250,11 +265,7 @@ module TestDeviceSenderC
 	  //m_ledCount = 0;
 	
     }
-	//else{
-	//	call Leds.led0On();
-	//	call TimerSendPac.stop();
-	//	startApp();
-	//}
+	
     
   }
 
@@ -270,6 +281,7 @@ module TestDeviceSenderC
     call Leds.led2Off();
 	call Leds.led0On();
 	call TimerSendPac.stop();
+	call TimerChgPrd.stop();
 	startApp();
   }
 
