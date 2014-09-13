@@ -59,6 +59,7 @@ module TestDeviceSenderC
     interface Leds;
     interface Packet as MACPacket;
 	interface Packet as SerialPacket;
+	interface Random;
   }
 } implementation {
 
@@ -70,15 +71,17 @@ module TestDeviceSenderC
   uint16_t m_numOfTransmission;
   uint16_t m_numOfSuccess;
   float m_PSR;
+  uint8_t period;
   bool locked = FALSE;
   message_t packet;
+  bool intervalFlag = FALSE;
 
   void startApp();
   task void packetSendTask();
 
 
   event void Boot.booted() {
-    char payload[] = "Hello Coordinator!";
+    char payload[] = "He";
     uint8_t *payloadRegion;
 
     m_payloadLen = strlen(payload);
@@ -180,32 +183,60 @@ module TestDeviceSenderC
           NULL                            // security
           );
       // Initilize the packet transmission timer
-	  call TimerSendPac.startPeriodic(20);
+	  period = 32;
+	  call TimerSendPac.startOneShot(period);
 	  // Initialize the transmission rate adjustment algorithm
-	  call TimerChgPrd.startPeriodic(10000);
+	  call TimerChgPrd.startOneShot(20000);
 	  
     } else
       startApp();
   }
   
+  uint16_t getRandomNumber(uint8_t bias){
+		uint16_t res = call Random.rand16();
+		uint16_t mask = 0xFFFF;
+		mask <<= bias;
+		mask = ~mask;
+		res &= mask;
+		return res;
+  }
+  
   event void TimerSendPac.fired(){
 	 post packetSendTask();
+	 if(intervalFlag){
+		call TimerSendPac.startOneShot(period+getRandomNumber(3));
+		intervalFlag = FALSE;
+	}else{
+		call TimerSendPac.startOneShot(period-getRandomNumber(3));
+		intervalFlag = TRUE;
+	}
+	 
   }
   
   event void TimerChgPrd.fired(){
-	call TimerSendPac.stop();
+
+	//call TimerSendPac.stop();
 	 
 	m_PSR = (float)m_numOfSuccess/(float)m_numOfTransmission;
 	
-	if (m_PSR > 0.9)
-		call TimerSendPac.startPeriodic(300);
-    else
-		call TimerSendPac.startPeriodic(300);
 	m_numOfSuccess = 0;
 	m_numOfTransmission = 0;
+	
+	if(m_PSR>0.94){
+		period = 32;
+	}
+	else {
+	   // an approximate algorithm
+	   period = (uint16_t)(0.32*(77+200*(m_PSR-0.825)));   
+	}
+	
+	
+	//call TimerSendPac.startPeriodic(period);
   }
   
-  void sendToSerial(uint16_t numOfTransmission, uint16_t numOfSuccess) {
+  
+  
+  void sendToSerial() {
     //counter++;
     if (locked) {
       return;
@@ -217,8 +248,9 @@ module TestDeviceSenderC
 	return;
       }
 	  
-      rcm->numOfTransmission = numOfTransmission;
-	  rcm->numOfSuccess = numOfSuccess;
+      rcm->numOfTransmission = m_numOfTransmission;
+	  rcm->numOfSuccess = m_numOfSuccess;
+	  rcm->period = period;
 	  
       if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(test_serial_msg_t)) == SUCCESS) {
 	locked = TRUE;
@@ -261,7 +293,7 @@ module TestDeviceSenderC
     if (status == IEEE154_SUCCESS ) {
 	  m_numOfSuccess++;
 	  call Leds.led1Toggle();
-	  sendToSerial(m_numOfTransmission,m_numOfSuccess);
+	  sendToSerial();
 	  //m_ledCount = 0;
 	
     }

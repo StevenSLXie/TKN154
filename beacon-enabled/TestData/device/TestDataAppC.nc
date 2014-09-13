@@ -37,12 +37,18 @@
 
 configuration TestDataAppC
 {
+	//uses{
+		//interface Random;
+	//}  
 } implementation {
   components MainC, LedsC, Ieee802154BeaconEnabledC as MAC;
   components new TimerMilliC() as TimerSendPac;	
   components new TimerMilliC() as TimerChgPrd;
   components TestDeviceSenderC as App;
   components SerialActiveMessageC as AM;
+  components RandomC;
+  
+  App.Random -> RandomC;
   
   App.Boot -> MainC.Boot;
   App.Control -> AM;
@@ -65,4 +71,5 @@ configuration TestDataAppC
   App.MLME_RESET -> MAC;
   App.MLME_SET -> MAC;
   App.MLME_GET -> MAC;
+  
 }

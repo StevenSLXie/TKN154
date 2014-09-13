@@ -5,6 +5,7 @@
 typedef nx_struct test_serial_msg {
   nx_uint16_t numOfTransmission;
   nx_uint16_t numOfSuccess;
+  nx_uint16_t period;
 } test_serial_msg_t;
 
 enum {
