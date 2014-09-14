@@ -42,9 +42,9 @@ module TestDeviceSenderC
   uses {
     interface Boot;
 	interface SplitControl as Control;
-	interface Timer<TMilli> as TimerSendPac;
+	//interface Timer<TMicro> as TimerSendPac;
 	//interface Msp430Timer as TimerSendPac;
-	//interface Msp430Alarm as TimerSendPac;
+	interface Alarm<TMicro, uint16_t> as TimerSendPac;
 	interface Timer<TMilli> as TimerChgPrd;
     interface AMSend;
 	
@@ -77,7 +77,7 @@ module TestDeviceSenderC
   bool locked = FALSE;
   message_t packet;
   bool intervalFlag = FALSE;
-  uint8_t nodeType = 1;
+  uint8_t nodeType = 4;
 
   void startApp();
   task void packetSendTask();
@@ -186,17 +186,18 @@ module TestDeviceSenderC
           NULL                            // security
           );
       // Initilize the packet transmission timer
-	  //period = 32;
+
 	  if (1==nodeType){
-		  period = 16;
+		  period = 16000;
 	   }else if(2 == nodeType){
-		  period = 32;
+		  period = 32000;
 	  } else if(3 == nodeType){
-		  period = 48;
+		  period = 48000;
 	  } else if(4 == nodeType){
-		  period = 64;
+		  period = 64000;
 	  }
-	  call TimerSendPac.startOneShot(period);
+	  //call TimerSendPac.startOneShot(period);
+	  call TimerSendPac.start(period);
 	  // Initialize the transmission rate adjustment algorithm
 	  call TimerChgPrd.startOneShot(50000);
 	  
@@ -213,13 +214,15 @@ module TestDeviceSenderC
 		return res;
   }
   
-  event void TimerSendPac.fired(){
+  async event void TimerSendPac.fired(){
 	 post packetSendTask();
 	 if(intervalFlag){
-		call TimerSendPac.startOneShot(period+getRandomNumber(3));
+		//call TimerSendPac.startOneShot(period+getRandomNumber(3));
+		call TimerSendPac.start(period+getRandomNumber(3000));
 		intervalFlag = FALSE;
 	}else{
-		call TimerSendPac.startOneShot(period-getRandomNumber(3));
+		//call TimerSendPac.startOneShot(period+getRandomNumber(3));
+		call TimerSendPac.start(period-getRandomNumber(3000));
 		intervalFlag = TRUE;
 	}
 	 
@@ -239,37 +242,37 @@ module TestDeviceSenderC
 	
 	if (1 == nodeType){
 	
-	   if(m_PSR>0.935){
-		  period = 16;
+	   if(m_PSR>0.975){
+		  period = 16000;
 	   }
 	   else {
 	      // an approximate algorithm
-	      period = (uint16_t)(0.32*(39+100*(m_PSR-0.825)));   
+	      period = (uint16_t)(320*(37+92.8*(m_PSR-0.835)));   
 	   }
 	
     }else if(2 == nodeType){
-	   if(m_PSR>0.94){
+	   if(m_PSR>0.98){
 		  period = 32;
 	   }
 	   else {
 	      // an approximate algorithm
-	      period = (uint16_t)(0.32*(77+200*(m_PSR-0.825)));   
+	      period = (uint16_t)(320*(74+179*(m_PSR-0.835)));   
 	   }
 	}else if(3 == nodeType){
-	   if(m_PSR>0.945){
+	   if(m_PSR>0.98){
 		  period = 48;
 	   }
 	   else {
 	      // an approximate algorithm
-	      period = (uint16_t)(0.32*(115+280*(m_PSR-0.825)));   
+	      period = (uint16_t)(320*(110+276*(m_PSR-0.835)));   
 	   }
     }else if(4 == nodeType){
-	  if(m_PSR>0.945){
-		  period = 64;
+	  if(m_PSR>0.98){
+		  period = 64000;
 	   }
 	   else {
 	      // an approximate algorithm
-	      period = (uint16_t)(0.32*(154+368*(m_PSR-0.825)));   
+	      period = (uint16_t)(320*(149+352*(m_PSR-0.825)));   
 	   }
    }
 	
