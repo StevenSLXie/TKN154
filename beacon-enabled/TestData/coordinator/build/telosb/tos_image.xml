@@ -1,13 +1,13 @@
 <tos_image>
   <ident>
-    <username>shuanglong</username>
-    <uidhash>DC29415BL</uidhash>
-    <appname>TestDataAppC</appname>
-    <platform>telosb</platform>
-    <hostname>WirelessLab</hostname>
-    <timestamp>53F996BAL</timestamp>
+    <timestamp>5414F5CCL</timestamp>
     <deluge_support>no</deluge_support>
+    <hostname>WirelessLab</hostname>
+    <username>shuanglong</username>
+    <platform>telosb</platform>
+    <appname>TestDataAppC</appname>
     <userhash>4C80E3B0L</userhash>
+    <uidhash>30CB89D3L</uidhash>
   </ident>
   <image format="ihex">
 :10400000314000391542200175F335D0085A3F4040
@@ -1287,7 +1287,7 @@
 :108FA0005000B012BC753E4073127F400300B012F7
 :108FB000BC753E4072126F43B012BC753E407412D5
 :108FC0006F42B012BC753E4070127F40F0FFB0128D
-:108FD000BC755F43B012305AF2402C0072123E4012
+:108FD000BC755F43B012305AF240360072123E4008
 :108FE00072126F43B012BC75B240314384123E40DE
 :108FF00084127F405300B012BC75C24368123E40D9
 :1090000068127F404100B012BC75B29384120220F6

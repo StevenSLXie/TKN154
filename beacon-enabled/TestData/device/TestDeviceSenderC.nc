@@ -43,6 +43,8 @@ module TestDeviceSenderC
     interface Boot;
 	interface SplitControl as Control;
 	interface Timer<TMilli> as TimerSendPac;
+	//interface Msp430Timer as TimerSendPac;
+	//interface Msp430Alarm as TimerSendPac;
 	interface Timer<TMilli> as TimerChgPrd;
     interface AMSend;
 	
@@ -71,10 +73,11 @@ module TestDeviceSenderC
   uint16_t m_numOfTransmission;
   uint16_t m_numOfSuccess;
   float m_PSR;
-  uint8_t period;
+  uint16_t period;
   bool locked = FALSE;
   message_t packet;
   bool intervalFlag = FALSE;
+  uint8_t nodeType = 1;
 
   void startApp();
   task void packetSendTask();
@@ -183,10 +186,19 @@ module TestDeviceSenderC
           NULL                            // security
           );
       // Initilize the packet transmission timer
-	  period = 32;
+	  //period = 32;
+	  if (1==nodeType){
+		  period = 16;
+	   }else if(2 == nodeType){
+		  period = 32;
+	  } else if(3 == nodeType){
+		  period = 48;
+	  } else if(4 == nodeType){
+		  period = 64;
+	  }
 	  call TimerSendPac.startOneShot(period);
 	  // Initialize the transmission rate adjustment algorithm
-	  call TimerChgPrd.startOneShot(20000);
+	  call TimerChgPrd.startOneShot(50000);
 	  
     } else
       startApp();
@@ -214,6 +226,7 @@ module TestDeviceSenderC
   }
   
   event void TimerChgPrd.fired(){
+    
 
 	//call TimerSendPac.stop();
 	 
@@ -222,13 +235,43 @@ module TestDeviceSenderC
 	m_numOfSuccess = 0;
 	m_numOfTransmission = 0;
 	
-	if(m_PSR>0.94){
-		period = 32;
-	}
-	else {
-	   // an approximate algorithm
-	   period = (uint16_t)(0.32*(77+200*(m_PSR-0.825)));   
-	}
+	
+	
+	if (1 == nodeType){
+	
+	   if(m_PSR>0.935){
+		  period = 16;
+	   }
+	   else {
+	      // an approximate algorithm
+	      period = (uint16_t)(0.32*(39+100*(m_PSR-0.825)));   
+	   }
+	
+    }else if(2 == nodeType){
+	   if(m_PSR>0.94){
+		  period = 32;
+	   }
+	   else {
+	      // an approximate algorithm
+	      period = (uint16_t)(0.32*(77+200*(m_PSR-0.825)));   
+	   }
+	}else if(3 == nodeType){
+	   if(m_PSR>0.945){
+		  period = 48;
+	   }
+	   else {
+	      // an approximate algorithm
+	      period = (uint16_t)(0.32*(115+280*(m_PSR-0.825)));   
+	   }
+    }else if(4 == nodeType){
+	  if(m_PSR>0.945){
+		  period = 64;
+	   }
+	   else {
+	      // an approximate algorithm
+	      period = (uint16_t)(0.32*(154+368*(m_PSR-0.825)));   
+	   }
+   }
 	
 	
 	//call TimerSendPac.startPeriodic(period);
@@ -293,7 +336,9 @@ module TestDeviceSenderC
     if (status == IEEE154_SUCCESS ) {
 	  m_numOfSuccess++;
 	  call Leds.led1Toggle();
-	  sendToSerial();
+	  if(m_numOfTransmission%100 == 0){
+		sendToSerial();
+	  }
 	  //m_ledCount = 0;
 	
     }

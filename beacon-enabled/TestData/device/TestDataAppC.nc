@@ -42,7 +42,9 @@ configuration TestDataAppC
 	//}  
 } implementation {
   components MainC, LedsC, Ieee802154BeaconEnabledC as MAC;
-  components new TimerMilliC() as TimerSendPac;	
+  components new TimerMilliC() as TimerSendPac;
+  //components new Msp430TimerMicroC() as TimerSendPac;
+  //components new AlarmMicro16C() as TimerSendPac;
   components new TimerMilliC() as TimerChgPrd;
   components TestDeviceSenderC as App;
   components SerialActiveMessageC as AM;
