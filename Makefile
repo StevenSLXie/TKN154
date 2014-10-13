@@ -34,6 +34,8 @@ BASEDIR = $(shell pwd | sed 's@\(.*\)/apps.*$$@\1@' )
 # The output directory for generated documentation
 DOCDIR = $(BASEDIR)/doc/nesdoc
 
+CFLAGS += -I$(TOSDIR)/lib/printf
+
 nesdoc:
 	@echo This target rebuilds documentation for all known platforms.
 	@echo It DOES NOT overwrite any existing documentation, thus, it 

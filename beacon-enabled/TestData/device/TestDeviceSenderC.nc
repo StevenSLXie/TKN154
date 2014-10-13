@@ -36,6 +36,7 @@
 #include "TKN154.h"
 #include "app_profile.h"
 #include "TestSerial.h"
+#include "printf.h"
 
 module TestDeviceSenderC
 {

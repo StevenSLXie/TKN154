@@ -7,6 +7,8 @@ CLEAN_EXTRA = *.class TestSerialMsg.java
 
 CFLAGS += -I$(TOSDIR)/lib/T2Hack
 
+CFLAGS += -I$(TOSDIR)/lib/printf
+
 TestSerial.class: $(wildcard *.java) TestSerialMsg.java
 	javac -target 1.4 -source 1.4 *.java
 
