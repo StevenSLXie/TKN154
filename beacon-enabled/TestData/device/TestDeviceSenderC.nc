@@ -72,12 +72,13 @@ module TestDeviceSenderC
   bool m_wasScanSuccessful;
   uint16_t m_numOfTransmission;
   uint16_t m_numOfSuccess;
-  float m_PSR;
+  float m_PSR = 0;
   float m_beta;
   float m_delta;
   float m_traffic;
   uint16_t period;
   uint16_t thu = 32000;
+  uint16_t interval = 0;
   bool locked = FALSE;
   message_t packet;
   uint8_t nodeType = 2;
@@ -334,22 +335,46 @@ module TestDeviceSenderC
 	}
 	*/
 	
+	interval++;
+	
 	float PSR_b = 0;
 	
 	PSR_b = (float)m_numOfSuccess/(float)m_numOfTransmission;
 	
-	if((PSR_b-m_PSR)<0.03 || (m_PSR-PSR_b)<0.03){
 	
-	}
-	else{
-	
+	if(1 == interval){
 		m_PSR = PSR_b;  // calculate the PSR
 		m_beta = fromPSRToBeta(m_PSR);
 		m_traffic = fromBetaToTraffic(m_beta);
 		m_beta = findOptimalBeta(m_traffic);
 		m_delta = findOptimalDelta(m_traffic,m_beta);
 		period = (float)thu/m_delta;
+	}
 	
+	if((PSR_b-m_PSR)<0.03 || (m_PSR-PSR_b)<0.03){
+	
+	}
+	else if((PSR_b-m_PSR)>=0.03){
+		float curTraf = 0
+		m_PSR = PSR_b;  // calculate the PSR
+		m_beta = fromPSRToBeta(m_PSR);
+		curTraf = fromBetaToTraffic(m_beta);
+		curTraf -= (m_delta*m_traffic);
+		m_traffic += curTraf;
+		m_beta = findOptimalBeta(m_traffic);
+		m_delta = findOptimalDelta(m_traffic,m_beta);
+		period = (float)thu/m_delta;
+	
+	}
+	else if((m_PSR-PSR_b)>=0.03){
+		m_PSR = PSR_b;  // calculate the PSR
+		m_beta = fromPSRToBeta(m_PSR);
+		m_traffic = fromBetaToTraffic(m_beta);
+		m_traffic /= m_delta;
+		m_beta = findOptimalBeta(m_traffic);
+		m_delta = findOptimalDelta(m_traffic,m_beta);
+		period = (float)thu/m_delta;
+		
 	}
 	m_numOfSuccess = 0;
 	m_numOfTransmission = 0;
