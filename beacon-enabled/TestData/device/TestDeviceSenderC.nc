@@ -38,6 +38,8 @@
 #include "TestSerial.h"
 #include "printf.h"
 
+#define MAX(A,B) ((A)>(B))?(A):(B)
+
 module TestDeviceSenderC
 {
   uses {
@@ -82,7 +84,7 @@ module TestDeviceSenderC
   uint16_t interval = 0;
   bool locked = FALSE;
   message_t packet;
-  uint8_t nodeType = 2;
+  uint8_t nodeType = 1;
   uint8_t timerFlag = 0;
 
 
@@ -280,7 +282,7 @@ module TestDeviceSenderC
   }
   
   float findOptimalBeta(float traffic){
-	  float betaCan;
+	  float betaCan = 0;
 	  float trafCan;
 	  
 	  float betaBest;
@@ -327,7 +329,7 @@ module TestDeviceSenderC
   }
   
   float findOptimalDelta(float traffic, float beta){
-		return beta/(1-beta*beta*beta*beta*beta)/(traffic)/6.0;
+		return MAX(beta/(1-beta*beta*beta*beta*beta)/(traffic)/6.0,1);
   }
   
   event void TimerChgPrd.fired(){
@@ -389,7 +391,28 @@ module TestDeviceSenderC
 
   }
   
-  
+  void printfFloat(float toBePrinted) {
+     uint32_t fi, f0, f1, f2;
+     char c;
+     float f = toBePrinted;
+
+     if (f<0){
+       c = '-'; f = -f;
+     } else {
+       c = ' ';
+     }
+
+     // integer portion.
+     fi = (uint32_t) f;
+
+     // decimal portion...get index for up to 3 decimal places.
+     f = f - ((float) fi);
+     f0 = f*10;   f0 %= 10;
+     f1 = f*100;  f1 %= 10;
+     f2 = f*1000; f2 %= 10;
+     printf("%c%ld.%d%d%d", c, fi, (uint8_t) f0, (uint8_t) f1,  
+(uint8_t) f2);
+   }
   
   void sendToSerial() {
    /*
@@ -412,7 +435,22 @@ module TestDeviceSenderC
       }
     }
 	*/
+	
+	printf("the number of transmission is %u.\n",m_numOfTransmission);
+	printf("the number of successful transmission is %u.\n",m_numOfSuccess);
+	//printf("the beta is %u.\n", (uint16_t)(m_beta*1000));
+	//printf("the delta is %u.\n", (uint16_t)(m_delta*1000));
+	//printf("the PSR is %u.\n", (uint16_t)(m_PSR*1000));
+	//printf("the traffic is %u.\n", (uint16_t)(m_traffic*10000));
+	printfFloat(m_beta);
+	printfFloat(m_delta);
+	printfFloat(m_PSR);
+	printfFloat(m_traffic);
+	printfflush();
+	
   }
+  
+  
 
   task void packetSendTask()
   {
