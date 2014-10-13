@@ -230,25 +230,41 @@ module TestDeviceSenderC
   float fromPSRToBeta(float PSR){
 	  float betaCan = 0;
 	  float PSRCan = 0;
+	  
+	  float betaBest = 0;
+	  float dif = 100000;
+	  
 	  if(PSR < 0.8)
 		  return 0.5;
       else if (PSR <= 0.90){
 		  for(int i =0;i<= 20;i++){
 			   betaCan = 0.30 + 0.01*i;
 			   PSRCan = (1-betaCan*betaCan*betaCan*betaCan*betaCan)*(1-betaCan/(1-betaCan)/6.0);
-			   if((PSRCan - PSR) < 0.015 || (PSR - PSRCan) < 0.015){
-					return betaCan;	
+			   
+			   if((PSRCan - PSR) < dif || (PSR - PSRCan) < dif){
+					dif = ((PSRCan - PSR)>0)? (PSRCan - PSR):(PSR - PSRCan);
+					betaBest = betaCan;
+			   }
+			   
+			   if(dif < 0.005){
+					return betaBest;	
 			   }
 		  }
-		  return betaCan;
+		  return betaBest;
 	  }
 	  else {
 		  for(int i =0;i<= 38;i++){
 			   betaCan = 0.01*i;
 			   PSRCan = (1-betaCan*betaCan*betaCan*betaCan*betaCan)*(1-betaCan/(1-betaCan)/6.0);
-			   if((PSRCan - PSR) < 0.015 || (PSR - PSRCan) < 0.015){
-					return betaCan;	
-			   }			   
+			   
+			   if((PSRCan - PSR) < dif || (PSR - PSRCan) < dif){
+					dif = ((PSRCan - PSR)>0)? (PSRCan - PSR):(PSR - PSRCan);
+					betaBest = betaCan;
+			   }
+			   
+			   if(dif < 0.005){
+					return betaBest;	
+			   }		   
 		  }
 		  return betaCan;
 	  }
@@ -262,28 +278,44 @@ module TestDeviceSenderC
   float findOptimalBeta(float traffic){
 	  float betaCan;
 	  float trafCan;
+	  
+	  float betaBest;
+	  float dif = 10000;
+	  
 	  if (traffic > 0.085)
 		  return 0.7;
       else if (traffic <= 0.05){
 		 for(int i =0;i<= 30;i++){
 			 betaCan = 0.01*i;
 			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
+			 
 			 if((trafCan - traffic) < 0.005 || (PSR - PSRCan) < 0.005){
-					return betaCan;	
+				dif = ((trafCan - traffic)>0)? (trafCan - traffic):(traffic - trafCan);
+				betaBest = betaCan;
+			 }
+			 
+			 if(dif < 0.002){
+					return betaBest;	
 			 }			   
 		 }
-		 return betaCan;
+		 return betaBest;
 	  }
 	  
 	  else{
 		 for(int i =0;i<= 40;i++){
 			 betaCan = 0.2+0.01*i;
 			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
+			 
 			 if((trafCan - traffic) < 0.005 || (PSR - PSRCan) < 0.005){
-					return betaCan;	
-			 }			   
+				dif = ((trafCan - traffic)>0)? (trafCan - traffic):(traffic - trafCan);
+				betaBest = betaCan;
+			 }
+			 
+			 if(dif < 0.002){
+					return betaBest;	
+			 }				   
 		 }
-		 return betaCan;
+		 return betaBest;
 	  }
 	  
   }
