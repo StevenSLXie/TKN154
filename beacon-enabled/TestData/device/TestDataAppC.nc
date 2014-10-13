@@ -50,9 +50,10 @@ configuration TestDataAppC
   components TestDeviceSenderC as App;
   components SerialActiveMessageC as AM;
   components RandomC;
-  components TestPrintfC;
+  components PrintfC;
+  components SerialStartC;
   
-  TestPrintfC.Boot -> MAC;
+  //TestPrintfC.Boot -> MAC;
   
   
   

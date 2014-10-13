@@ -232,6 +232,7 @@ module TestDeviceSenderC
   float fromPSRToBeta(float PSR){
 	  float betaCan = 0;
 	  float PSRCan = 0;
+	  uint8_t i;
 	  
 	  float betaBest = 0;
 	  float dif = 100000;
@@ -239,9 +240,10 @@ module TestDeviceSenderC
 	  if(PSR < 0.8)
 		  return 0.5;
       else if (PSR <= 0.90){
-		  for(int i =0;i<= 20;i++){
+		  
+		  for(i =0;i<= 20;i++){
 			   betaCan = 0.30 + 0.01*i;
-			   PSRCan = (1-betaCan*betaCan*betaCan*betaCan*betaCan)*(1-betaCan/(1-betaCan)/6.0);
+			   PSRCan = (1.0-betaCan*betaCan*betaCan*betaCan*betaCan)*(1.0-betaCan/(1-betaCan)/6.0);
 			   
 			   if((PSRCan - PSR) < dif || (PSR - PSRCan) < dif){
 					dif = ((PSRCan - PSR)>0)? (PSRCan - PSR):(PSR - PSRCan);
@@ -255,9 +257,9 @@ module TestDeviceSenderC
 		  return betaBest;
 	  }
 	  else {
-		  for(int i =0;i<= 38;i++){
+		  for(i =0;i<= 38;i++){
 			   betaCan = 0.01*i;
-			   PSRCan = (1-betaCan*betaCan*betaCan*betaCan*betaCan)*(1-betaCan/(1-betaCan)/6.0);
+			   PSRCan = (1.0-betaCan*betaCan*betaCan*betaCan*betaCan)*(1.0-betaCan/(1-betaCan)/6.0);
 			   
 			   if((PSRCan - PSR) < dif || (PSR - PSRCan) < dif){
 					dif = ((PSRCan - PSR)>0)? (PSRCan - PSR):(PSR - PSRCan);
@@ -284,14 +286,16 @@ module TestDeviceSenderC
 	  float betaBest;
 	  float dif = 10000;
 	  
+	  uint8_t i;
+	  
 	  if (traffic > 0.085)
 		  return 0.7;
       else if (traffic <= 0.05){
-		 for(int i =0;i<= 30;i++){
+		 for(i =0;i<= 30;i++){
 			 betaCan = 0.01*i;
 			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
 			 
-			 if((trafCan - traffic) < 0.005 || (PSR - PSRCan) < 0.005){
+			 if((trafCan - traffic) < 0.005 || (traffic - trafCan) < 0.005){
 				dif = ((trafCan - traffic)>0)? (trafCan - traffic):(traffic - trafCan);
 				betaBest = betaCan;
 			 }
@@ -304,11 +308,11 @@ module TestDeviceSenderC
 	  }
 	  
 	  else{
-		 for(int i =0;i<= 40;i++){
+		 for(i =0;i<= 40;i++){
 			 betaCan = 0.2+0.01*i;
 			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
 			 
-			 if((trafCan - traffic) < 0.005 || (PSR - PSRCan) < 0.005){
+			 if((trafCan - traffic) < 0.005 || (traffic - trafCan) < 0.005){
 				dif = ((trafCan - traffic)>0)? (trafCan - traffic):(traffic - trafCan);
 				betaBest = betaCan;
 			 }
@@ -336,9 +340,11 @@ module TestDeviceSenderC
 	}
 	*/
 	
-	interval++;
+	
 	
 	float PSR_b = 0;
+	
+	interval++;
 	
 	PSR_b = (float)m_numOfSuccess/(float)m_numOfTransmission;
 	
@@ -356,7 +362,7 @@ module TestDeviceSenderC
 	
 	}
 	else if((PSR_b-m_PSR)>=0.03){
-		float curTraf = 0
+		float curTraf = 0;
 		m_PSR = PSR_b;  // calculate the PSR
 		m_beta = fromPSRToBeta(m_PSR);
 		curTraf = fromBetaToTraffic(m_beta);
@@ -386,7 +392,7 @@ module TestDeviceSenderC
   
   
   void sendToSerial() {
-    //counter++;
+   /*
     if (locked) {
       return;
     }
@@ -405,6 +411,7 @@ module TestDeviceSenderC
 	locked = TRUE;
       }
     }
+	*/
   }
 
   task void packetSendTask()
