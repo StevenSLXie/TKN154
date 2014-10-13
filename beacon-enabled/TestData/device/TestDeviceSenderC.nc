@@ -73,11 +73,16 @@ module TestDeviceSenderC
   uint16_t m_numOfTransmission;
   uint16_t m_numOfSuccess;
   float m_PSR;
+  float m_beta;
+  float m_delta;
+  float m_traffic;
   uint16_t period;
+  uint16_t thu = 32000;
   bool locked = FALSE;
   message_t packet;
-  bool intervalFlag = FALSE;
-  uint8_t nodeType = 4;
+  uint8_t nodeType = 2;
+  uint8_t timerFlag = 0;
+
 
   void startApp();
   task void packetSendTask();
@@ -188,18 +193,18 @@ module TestDeviceSenderC
       // Initilize the packet transmission timer
 
 	  if (1==nodeType){
-		  period = 16000;
+		  period = 32000;
 	   }else if(2 == nodeType){
 		  period = 32000;
 	  } else if(3 == nodeType){
-		  period = 48000;
+		  period = 32000;
 	  } else if(4 == nodeType){
-		  period = 64000;
+		  period = 32000;
 	  }
 	  //call TimerSendPac.startOneShot(period);
 	  call TimerSendPac.start(period);
 	  // Initialize the transmission rate adjustment algorithm
-	  call TimerChgPrd.startOneShot(50000);
+	  call TimerChgPrd.startOneShot(60000);
 	  
     } else
       startApp();
@@ -215,69 +220,109 @@ module TestDeviceSenderC
   }
   
   async event void TimerSendPac.fired(){
-	 post packetSendTask();
-	 if(intervalFlag){
-		//call TimerSendPac.startOneShot(period+getRandomNumber(3));
-		call TimerSendPac.start(period+getRandomNumber(3000));
-		intervalFlag = FALSE;
-	}else{
-		//call TimerSendPac.startOneShot(period+getRandomNumber(3));
-		call TimerSendPac.start(period-getRandomNumber(3000));
-		intervalFlag = TRUE;
-	}
 	 
+	//call TimerSendPac.start(0.9*period+getRandomNumber(0.2*period));
+	call TimerSendPac.start(period);
+	post packetSendTask();
+	 
+  }
+  
+  float fromPSRToBeta(float PSR){
+	  float betaCan = 0;
+	  float PSRCan = 0;
+	  if(PSR < 0.8)
+		  return 0.5;
+      else if (PSR <= 0.90){
+		  for(int i =0;i<= 20;i++){
+			   betaCan = 0.30 + 0.01*i;
+			   PSRCan = (1-betaCan*betaCan*betaCan*betaCan*betaCan)*(1-betaCan/(1-betaCan)/6.0);
+			   if((PSRCan - PSR) < 0.015 || (PSR - PSRCan) < 0.015){
+					return betaCan;	
+			   }
+		  }
+		  return betaCan;
+	  }
+	  else {
+		  for(int i =0;i<= 38;i++){
+			   betaCan = 0.01*i;
+			   PSRCan = (1-betaCan*betaCan*betaCan*betaCan*betaCan)*(1-betaCan/(1-betaCan)/6.0);
+			   if((PSRCan - PSR) < 0.015 || (PSR - PSRCan) < 0.015){
+					return betaCan;	
+			   }			   
+		  }
+		  return betaCan;
+	  }
+	
+  }
+  
+  float fromBetaToTraffic(float beta){
+		return beta/(1-beta*beta*beta*beta*beta)/6.0;
+  }
+  
+  float findOptimalBeta(float traffic){
+	  float betaCan;
+	  float trafCan;
+	  if (traffic > 0.085)
+		  return 0.7;
+      else if (traffic <= 0.05){
+		 for(int i =0;i<= 30;i++){
+			 betaCan = 0.01*i;
+			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
+			 if((trafCan - traffic) < 0.005 || (PSR - PSRCan) < 0.005){
+					return betaCan;	
+			 }			   
+		 }
+		 return betaCan;
+	  }
+	  
+	  else{
+		 for(int i =0;i<= 40;i++){
+			 betaCan = 0.2+0.01*i;
+			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
+			 if((trafCan - traffic) < 0.005 || (PSR - PSRCan) < 0.005){
+					return betaCan;	
+			 }			   
+		 }
+		 return betaCan;
+	  }
+	  
+  }
+  
+  float findOptimalDelta(float traffic, float beta){
+		return beta/(1-beta*beta*beta*beta*beta)/(traffic)/6.0;
   }
   
   event void TimerChgPrd.fired(){
     
-
-	//call TimerSendPac.stop();
-	 
-	m_PSR = (float)m_numOfSuccess/(float)m_numOfTransmission;
+	/*
+	if(timerFlag < 3){
+		timerFlag++;
+		call TimerChgPrd.startOneShot(60000);
+		return;
+	}
+	*/
 	
+	float PSR_b = 0;
+	
+	PSR_b = (float)m_numOfSuccess/(float)m_numOfTransmission;
+	
+	if((PSR_b-m_PSR)<0.03 || (m_PSR-PSR_b)<0.03){
+	
+	}
+	else{
+	
+		m_PSR = PSR_b;  // calculate the PSR
+		m_beta = fromPSRToBeta(m_PSR);
+		m_traffic = fromBetaToTraffic(m_beta);
+		m_beta = findOptimalBeta(m_traffic);
+		m_delta = findOptimalDelta(m_traffic,m_beta);
+		period = (float)thu/m_delta;
+	
+	}
 	m_numOfSuccess = 0;
 	m_numOfTransmission = 0;
-	
-	
-	
-	if (1 == nodeType){
-	
-	   if(m_PSR>0.975){
-		  period = 16000;
-	   }
-	   else {
-	      // an approximate algorithm
-	      period = (uint16_t)(320*(37+92.8*(m_PSR-0.835)));   
-	   }
-	
-    }else if(2 == nodeType){
-	   if(m_PSR>0.98){
-		  period = 32;
-	   }
-	   else {
-	      // an approximate algorithm
-	      period = (uint16_t)(320*(74+179*(m_PSR-0.835)));   
-	   }
-	}else if(3 == nodeType){
-	   if(m_PSR>0.98){
-		  period = 48;
-	   }
-	   else {
-	      // an approximate algorithm
-	      period = (uint16_t)(320*(110+276*(m_PSR-0.835)));   
-	   }
-    }else if(4 == nodeType){
-	  if(m_PSR>0.98){
-		  period = 64000;
-	   }
-	   else {
-	      // an approximate algorithm
-	      period = (uint16_t)(320*(149+352*(m_PSR-0.825)));   
-	   }
-   }
-	
-	
-	//call TimerSendPac.startPeriodic(period);
+    call TimerChgPrd.startOneShot(60000);
+
   }
   
   
