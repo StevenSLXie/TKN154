@@ -86,6 +86,10 @@ module TestDeviceSenderC
   message_t packet;
   uint8_t nodeType = 1;
   uint8_t timerFlag = 0;
+  
+  bool late = FALSE;
+  
+  uint16_t trans2 = 0;
 
 
   void startApp();
@@ -352,12 +356,24 @@ module TestDeviceSenderC
 	
 	
 	if(1 == interval){
+	
 		m_PSR = PSR_b;  // calculate the PSR
 		m_beta = fromPSRToBeta(m_PSR);
 		m_traffic = fromBetaToTraffic(m_beta);
-		m_beta = findOptimalBeta(m_traffic);
+		
+		if(late){
+		
+			m_beta = findOptimalBeta(m_traffic*m_PSR);
+			
+		}
+		else{
+		
+			m_beta = findOptimalBeta(m_traffic);
+			
+		}
 		m_delta = findOptimalDelta(m_traffic,m_beta);
 		period = (float)thu/m_delta;
+
 	}
 	
 	if((PSR_b-m_PSR)<0.03 || (m_PSR-PSR_b)<0.03){
@@ -438,14 +454,11 @@ module TestDeviceSenderC
 	
 	printf("the number of transmission is %u.\n",m_numOfTransmission);
 	printf("the number of successful transmission is %u.\n",m_numOfSuccess);
-	//printf("the beta is %u.\n", (uint16_t)(m_beta*1000));
-	//printf("the delta is %u.\n", (uint16_t)(m_delta*1000));
-	//printf("the PSR is %u.\n", (uint16_t)(m_PSR*1000));
-	//printf("the traffic is %u.\n", (uint16_t)(m_traffic*10000));
 	printfFloat(m_beta);
 	printfFloat(m_delta);
 	printfFloat(m_PSR);
 	printfFloat(m_traffic);
+	printf("\n");
 	printfflush();
 	
   }
@@ -466,12 +479,14 @@ module TestDeviceSenderC
           0,                                // msduHandle,
           TX_OPTIONS_ACK // TxOptions,
           ) != IEEE154_SUCCESS){
+	  //trans2++;
       call Leds.led0On();
 	
 	}
 	else{
 		call Leds.led0Off();
 		m_numOfTransmission++;
+		//trans2++;
 	}
 
 	
