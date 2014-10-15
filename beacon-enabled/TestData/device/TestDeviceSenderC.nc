@@ -39,6 +39,7 @@
 #include "printf.h"
 
 #define MAX(A,B) ((A)>(B))?(A):(B)
+//#define ABS(A) ((A)>=0)?((A):(-(A))) 
 
 module TestDeviceSenderC
 {
@@ -227,6 +228,13 @@ module TestDeviceSenderC
 		return res;
   }
   
+  float abs(float a){
+	 if(a>=0)
+		return a;
+	 else
+		return (-a);
+  }
+  
   async event void TimerSendPac.fired(){
 	 
 	//call TimerSendPac.start(0.9*period+getRandomNumber(0.2*period));
@@ -234,6 +242,29 @@ module TestDeviceSenderC
 	post packetSendTask();
 	 
   }
+  
+  void printfFloat(float toBePrinted) {
+     uint32_t fi, f0, f1, f2;
+     char c;
+     float f = toBePrinted;
+
+     if (f<0){
+       c = '-'; f = -f;
+     } else {
+       c = ' ';
+     }
+
+     // integer portion.
+     fi = (uint32_t) f;
+
+     // decimal portion...get index for up to 3 decimal places.
+     f = f - ((float) fi);
+     f0 = f*10;   f0 %= 10;
+     f1 = f*100;  f1 %= 10;
+     f2 = f*1000; f2 %= 10;
+     printf("%c%ld.%d%d%d", c, fi, (uint8_t) f0, (uint8_t) f1,  
+(uint8_t) f2);
+   }
   
   float fromPSRToBeta(float PSR){
 	  float betaCan = 0;
@@ -251,8 +282,8 @@ module TestDeviceSenderC
 			   betaCan = 0.30 + 0.01*i;
 			   PSRCan = (1.0-betaCan*betaCan*betaCan*betaCan*betaCan)*(1.0-betaCan/(1-betaCan)/6.0);
 			   
-			   if((PSRCan - PSR) < dif || (PSR - PSRCan) < dif){
-					dif = ((PSRCan - PSR)>0)? (PSRCan - PSR):(PSR - PSRCan);
+			   if(abs(PSRCan - PSR)<dif){
+					dif = abs(PSRCan - PSR);
 					betaBest = betaCan;
 			   }
 			   
@@ -267,8 +298,8 @@ module TestDeviceSenderC
 			   betaCan = 0.01*i;
 			   PSRCan = (1.0-betaCan*betaCan*betaCan*betaCan*betaCan)*(1.0-betaCan/(1-betaCan)/6.0);
 			   
-			   if((PSRCan - PSR) < dif || (PSR - PSRCan) < dif){
-					dif = ((PSRCan - PSR)>0)? (PSRCan - PSR):(PSR - PSRCan);
+			   if(abs(PSRCan - PSR)<dif){
+					dif = abs(PSRCan - PSR);
 					betaBest = betaCan;
 			   }
 			   
@@ -301,8 +332,8 @@ module TestDeviceSenderC
 			 betaCan = 0.01*i;
 			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
 			 
-			 if((trafCan - traffic) < 0.005 || (traffic - trafCan) < 0.005){
-				dif = ((trafCan - traffic)>0)? (trafCan - traffic):(traffic - trafCan);
+			 if(abs(trafCan - traffic) < dif){
+				dif =abs(trafCan - traffic);
 				betaBest = betaCan;
 			 }
 			 
@@ -318,8 +349,8 @@ module TestDeviceSenderC
 			 betaCan = 0.2+0.01*i;
 			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
 			 
-			 if((trafCan - traffic) < 0.005 || (traffic - trafCan) < 0.005){
-				dif = ((trafCan - traffic)>0)? (trafCan - traffic):(traffic - trafCan);
+			 if(abs(trafCan - traffic) < dif){
+				dif = abs(trafCan - traffic);
 				betaBest = betaCan;
 			 }
 			 
@@ -345,8 +376,6 @@ module TestDeviceSenderC
 		return;
 	}
 	*/
-	
-	
 	
 	float PSR_b = 0;
 	
@@ -376,22 +405,24 @@ module TestDeviceSenderC
 
 	}
 	
-	if((PSR_b-m_PSR)<0.03 || (m_PSR-PSR_b)<0.03){
-	
-	}
-	else if((PSR_b-m_PSR)>=0.03){
+	else if((m_PSR - PSR_b)>=0.02){
 		float curTraf = 0;
 		m_PSR = PSR_b;  // calculate the PSR
 		m_beta = fromPSRToBeta(m_PSR);
+		//printf("Case 1.1.\n");
 		curTraf = fromBetaToTraffic(m_beta);
+		//printf("Case 1.2.\n");
 		curTraf -= (m_delta*m_traffic);
+		//printf("Case 1.3\n");
 		m_traffic += curTraf;
 		m_beta = findOptimalBeta(m_traffic);
+		//printf("Case 1.4\n");
 		m_delta = findOptimalDelta(m_traffic,m_beta);
 		period = (float)thu/m_delta;
+		//printf("Case 1.\n");
 	
 	}
-	else if((m_PSR-PSR_b)>=0.03){
+	else if((PSR_b - m_PSR)>=0.02){
 		m_PSR = PSR_b;  // calculate the PSR
 		m_beta = fromPSRToBeta(m_PSR);
 		m_traffic = fromBetaToTraffic(m_beta);
@@ -399,6 +430,7 @@ module TestDeviceSenderC
 		m_beta = findOptimalBeta(m_traffic);
 		m_delta = findOptimalDelta(m_traffic,m_beta);
 		period = (float)thu/m_delta;
+		printf("Case 2.\n");
 		
 	}
 	m_numOfSuccess = 0;
@@ -407,28 +439,7 @@ module TestDeviceSenderC
 
   }
   
-  void printfFloat(float toBePrinted) {
-     uint32_t fi, f0, f1, f2;
-     char c;
-     float f = toBePrinted;
-
-     if (f<0){
-       c = '-'; f = -f;
-     } else {
-       c = ' ';
-     }
-
-     // integer portion.
-     fi = (uint32_t) f;
-
-     // decimal portion...get index for up to 3 decimal places.
-     f = f - ((float) fi);
-     f0 = f*10;   f0 %= 10;
-     f1 = f*100;  f1 %= 10;
-     f2 = f*1000; f2 %= 10;
-     printf("%c%ld.%d%d%d", c, fi, (uint8_t) f0, (uint8_t) f1,  
-(uint8_t) f2);
-   }
+  
   
   void sendToSerial() {
    /*
