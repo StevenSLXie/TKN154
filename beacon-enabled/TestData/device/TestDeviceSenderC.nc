@@ -88,7 +88,7 @@ module TestDeviceSenderC
   uint8_t nodeType = 1;
   uint8_t timerFlag = 0;
   
-  bool late = FALSE;
+  bool late = TRUE;
   
   uint16_t trans2 = 0;
 
@@ -272,7 +272,7 @@ module TestDeviceSenderC
 	  uint8_t i;
 	  
 	  float betaBest = 0;
-	  float dif = 100000;
+	  float dif = 100;
 	  
 	  if(PSR < 0.8)
 		  return 0.5;
@@ -363,8 +363,8 @@ module TestDeviceSenderC
 	  
   }
   
-  float findOptimalDelta(float traffic, float beta){
-		return MAX(beta/(1-beta*beta*beta*beta*beta)/(traffic)/6.0,1);
+  float findOptimalDelta(float traffic, float beta, float PSR){
+		return MAX(beta/(1-beta*beta*beta*beta*beta)/(traffic)/6.0,1.0/PSR);
   }
   
   event void TimerChgPrd.fired(){
@@ -400,38 +400,58 @@ module TestDeviceSenderC
 			m_beta = findOptimalBeta(m_traffic);
 			
 		}
-		m_delta = findOptimalDelta(m_traffic,m_beta);
-		period = (float)thu/m_delta;
+		m_delta = findOptimalDelta(m_traffic,m_beta, m_PSR);
+		atomic{
+			period = (float)thu/m_delta;
+		}
+
 
 	}
 	
-	else if((m_PSR - PSR_b)>=0.02){
+	else if((m_PSR - PSR_b)>=0.015){
 		float curTraf = 0;
 		m_PSR = PSR_b;  // calculate the PSR
 		m_beta = fromPSRToBeta(m_PSR);
-		//printf("Case 1.1.\n");
+		printf("The current beta is:");
+		printfFloat(m_beta);
+		printf("\n");
 		curTraf = fromBetaToTraffic(m_beta);
-		//printf("Case 1.2.\n");
 		curTraf -= (m_delta*m_traffic);
-		//printf("Case 1.3\n");
 		m_traffic += curTraf;
 		m_beta = findOptimalBeta(m_traffic);
-		//printf("Case 1.4\n");
-		m_delta = findOptimalDelta(m_traffic,m_beta);
-		period = (float)thu/m_delta;
-		//printf("Case 1.\n");
+		printf("The current beta is:");
+		printfFloat(m_beta);
+		printf("\n");
+		m_delta = findOptimalDelta(m_traffic,m_beta, m_PSR);
+		atomic{
+			period = (float)thu/m_delta;
+		}	
+
 	
 	}
-	else if((PSR_b - m_PSR)>=0.02){
+	else if((PSR_b - m_PSR)>=0.015){
 		m_PSR = PSR_b;  // calculate the PSR
 		m_beta = fromPSRToBeta(m_PSR);
+		printf("The current beta is:");
+		printfFloat(m_beta);
+		printf("\n");
 		m_traffic = fromBetaToTraffic(m_beta);
 		m_traffic /= m_delta;
 		m_beta = findOptimalBeta(m_traffic);
-		m_delta = findOptimalDelta(m_traffic,m_beta);
-		period = (float)thu/m_delta;
+		printf("The current beta is:");
+		printfFloat(m_beta);
+		printf("\n");
+		m_delta = findOptimalDelta(m_traffic,m_beta, m_PSR);
+		atomic{
+			period = (float)thu/m_delta;
+		}
 		printf("Case 2.\n");
 		
+	}
+	else{
+		printf("Nothing changes.\nThe current beta is:");
+		printfFloat(fromPSRToBeta(PSR_b));
+		printf("\n");
 	}
 	m_numOfSuccess = 0;
 	m_numOfTransmission = 0;

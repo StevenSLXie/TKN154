@@ -766,7 +766,7 @@ enum __nesc_unnamed4253 {
   COORDINATOR_ADDRESS = 0x4331, 
   BEACON_ORDER = 5, 
   SUPERFRAME_ORDER = 5, 
-  TX_POWER = -10
+  TX_POWER = 0
 };
 # 39 "/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430Timer.h"
 enum __nesc_unnamed4254 {
