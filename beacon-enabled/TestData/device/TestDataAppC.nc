@@ -35,6 +35,7 @@
 #include "app_profile.h"
 #include "TestSerial.h"
 #include "printf.h"
+//#include "look_up_table.h"
 
 configuration TestDataAppC
 {

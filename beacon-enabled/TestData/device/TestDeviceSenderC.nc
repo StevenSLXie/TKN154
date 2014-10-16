@@ -37,6 +37,7 @@
 #include "app_profile.h"
 #include "TestSerial.h"
 #include "printf.h"
+//#include "look_up_table.h"
 
 #define MAX(A,B) ((A)>(B))?(A):(B)
 //#define ABS(A) ((A)>=0)?((A):(-(A))) 
@@ -93,7 +94,7 @@ module TestDeviceSenderC
   uint16_t trans2 = 0;
 
 
-  void startApp();
+  static void startApp();
   task void packetSendTask();
 
 
@@ -116,7 +117,7 @@ module TestDeviceSenderC
       startApp();
   }
 
-  void startApp()
+  static void startApp()
   {
     ieee154_phyChannelsSupported_t channelMask;
     uint8_t scanDuration = BEACON_ORDER;
@@ -219,7 +220,7 @@ module TestDeviceSenderC
       startApp();
   }
   
-  uint16_t getRandomNumber(uint8_t bias){
+  static uint16_t getRandomNumber(uint8_t bias){
 		uint16_t res = call Random.rand16();
 		uint16_t mask = 0xFFFF;
 		mask <<= bias;
@@ -228,7 +229,7 @@ module TestDeviceSenderC
 		return res;
   }
   
-  float abs(float a){
+  static float abs(float a){
 	 if(a>=0)
 		return a;
 	 else
@@ -243,7 +244,7 @@ module TestDeviceSenderC
 	 
   }
   
-  void printfFloat(float toBePrinted) {
+  static void printfFloat(float toBePrinted) {
      uint32_t fi, f0, f1, f2;
      char c;
      float f = toBePrinted;
@@ -265,7 +266,172 @@ module TestDeviceSenderC
      printf("%c%ld.%d%d%d", c, fi, (uint8_t) f0, (uint8_t) f1,  
 (uint8_t) f2);
    }
-  
+   
+   static float quan_beta(float PSR){
+
+	if(PSR>0.995)
+		return 0.01;
+	else if(PSR>0.990)
+		return 0.03;
+	else if(PSR>0.985)
+		return 0.06;
+	else if(PSR>0.980)
+		return 0.09;
+	else if(PSR>0.975)
+		return 0.11;
+	else if(PSR>0.970)
+		return 0.14;
+	else if(PSR>0.965)
+		return 0.16;
+	else if(PSR>0.960)
+		return 0.18;
+	else if(PSR>0.955)
+		return 0.20;
+	else if(PSR>0.950)
+		return 0.22;
+	else if(PSR>0.945)
+		return 0.23;
+	else if(PSR>0.940)
+		return 0.25;
+	else if(PSR>0.935)
+		return 0.27;
+	else if(PSR>0.930)
+		return 0.28;
+	else if(PSR>0.925)
+		return 0.30;
+	else if(PSR>0.920)
+		return 0.31;
+	else if(PSR>0.915)
+		return 0.32;
+	else if(PSR>0.910)
+		return 0.33;
+	else if(PSR>0.905)
+		return 0.34;
+	else if(PSR>0.900)
+		return 0.36;
+	else if(PSR>0.895)
+		return 0.37;
+	else if(PSR>0.890)
+		return 0.38;
+	else if(PSR>0.885)
+		return 0.39;
+	else if(PSR>0.880)
+		return 0.40;
+	else if(PSR>0.875)
+		return 0.40;
+	else if(PSR>0.870)
+		return 0.41;
+	else if(PSR>0.865)
+		return 0.42;
+	else if(PSR>0.860)
+		return 0.43;
+	else if(PSR>0.855)
+		return 0.44;
+	else if(PSR>0.850)
+		return 0.44;
+	else if(PSR>0.845)
+		return 0.45;
+	else if(PSR>0.840)
+		return 0.46;
+	else if(PSR>0.835)
+		return 0.47;
+	else if(PSR>0.830)
+		return 0.47;
+	else if(PSR>0.825)
+		return 0.48;
+	else if(PSR>0.820)
+		return 0.48;
+	else if(PSR>0.815)
+		return 0.49;
+	else if(PSR>0.810)
+		return 0.50;
+	else if(PSR>0.805)
+		return 0.50;
+	else if(PSR>0.800)
+		return 0.50;
+	else
+		return 0.60;
+
+}
+
+static float quan_opt_beta(float traffic){
+	if(traffic<0.0025)
+		return 0.01;
+	else if(traffic<0.0050)
+		return 0.01;
+	else if(traffic<0.0075)
+		return 0.01;
+	else if(traffic<0.0100)
+		return 0.01;
+	else if(traffic<0.0125)
+		return 0.02;
+	else if(traffic<0.0150)
+		return 0.04;
+	else if(traffic<0.0175)
+		return 0.05;
+	else if(traffic<0.0200)
+		return 0.07;
+	else if(traffic<0.0225)
+		return 0.08;
+	else if(traffic<0.0250)
+		return 0.10;
+	else if(traffic<0.0275)
+		return 0.11;
+	else if(traffic<0.0300)
+		return 0.13;
+	else if(traffic<0.0325)
+		return 0.14;
+	else if(traffic<0.0350)
+		return 0.16;
+	else if(traffic<0.0375)
+		return 0.18;
+	else if(traffic<0.0400)
+		return 0.19;
+	else if(traffic<0.0425)
+		return 0.21;
+	else if(traffic<0.0450)
+		return 0.23;
+	else if(traffic<0.0475)
+		return 0.24;
+	else if(traffic<0.0500)
+		return 0.26;
+	else if(traffic<0.0525)
+		return 0.28;
+	else if(traffic<0.0550)
+		return 0.29;
+	else if(traffic<0.0575)
+		return 0.31;
+	else if(traffic<0.0600)
+		return 0.33;
+	else if(traffic<0.0625)
+		return 0.35;
+	else if(traffic<0.0650)
+		return 0.37;
+	else if(traffic<0.0675)
+		return 0.39;
+	else if(traffic<0.0700)
+		return 0.41;
+	else if(traffic<0.0725)
+		return 0.43;
+	else if(traffic<0.0750)
+		return 0.46;
+	else if(traffic<0.0775)
+		return 0.48;
+	else if(traffic<0.0800)
+		return 0.51;
+	else if(traffic<0.0825)
+		return 0.55;
+	else if(traffic<0.0850)
+		return 0.61;
+	else if(traffic<0.0875)
+		return 0.8;
+	else if(traffic<0.0900)
+		return 0.8;
+	else
+		return 0.8;
+
+}
+ /* 
   float fromPSRToBeta(float PSR){
 	  float betaCan = 0;
 	  float PSRCan = 0;
@@ -287,7 +453,7 @@ module TestDeviceSenderC
 					betaBest = betaCan;
 			   }
 			   
-			   if(dif < 0.005){
+			   if(dif < 0.008){
 					return betaBest;	
 			   }
 		  }
@@ -303,7 +469,7 @@ module TestDeviceSenderC
 					betaBest = betaCan;
 			   }
 			   
-			   if(dif < 0.005){
+			   if(dif < 0.008){
 					return betaBest;	
 			   }		   
 		  }
@@ -311,17 +477,17 @@ module TestDeviceSenderC
 	  }
 	
   }
-  
-  float fromBetaToTraffic(float beta){
+*/  
+  static float fromBetaToTraffic(float beta){
 		return beta/(1-beta*beta*beta*beta*beta)/6.0;
   }
-  
+/*
   float findOptimalBeta(float traffic){
 	  float betaCan = 0;
 	  float trafCan;
 	  
-	  float betaBest;
-	  float dif = 10000;
+	  float betaBest = 0;
+	  float dif = 100;
 	  
 	  uint8_t i;
 	  
@@ -362,8 +528,8 @@ module TestDeviceSenderC
 	  }
 	  
   }
-  
-  float findOptimalDelta(float traffic, float beta, float PSR){
+ */ 
+  static float findOptimalDelta(float beta, float traffic, float PSR){
 		return MAX(beta/(1-beta*beta*beta*beta*beta)/(traffic)/6.0,1.0/PSR);
   }
   
@@ -377,9 +543,10 @@ module TestDeviceSenderC
 	}
 	*/
 	
+	
 	float PSR_b = 0;
 	
-	interval++;
+	++interval;
 	
 	PSR_b = (float)m_numOfSuccess/(float)m_numOfTransmission;
 	
@@ -387,21 +554,21 @@ module TestDeviceSenderC
 	if(1 == interval){
 	
 		m_PSR = PSR_b;  // calculate the PSR
-		m_beta = fromPSRToBeta(m_PSR);
-		m_traffic = fromBetaToTraffic(m_beta);
-		
-		if(late){
-		
-			m_beta = findOptimalBeta(m_traffic*m_PSR);
-			
-		}
-		else{
-		
-			m_beta = findOptimalBeta(m_traffic);
-			
-		}
-		m_delta = findOptimalDelta(m_traffic,m_beta, m_PSR);
 		atomic{
+			//m_beta = fromPSRToBeta(m_PSR);
+			m_beta = quan_beta(m_PSR);
+			
+			m_traffic = fromBetaToTraffic(m_beta);
+		
+			if(late){		
+				//m_beta = findOptimalBeta(m_traffic*m_PSR);	
+				m_beta = quan_opt_beta(m_traffic*m_PSR);
+			}
+			else{		
+				//m_beta = findOptimalBeta(m_traffic);
+				m_beta = quan_opt_beta(m_traffic);
+			}
+			m_delta = findOptimalDelta(m_beta, m_traffic,m_PSR);		
 			period = (float)thu/m_delta;
 		}
 
@@ -411,19 +578,28 @@ module TestDeviceSenderC
 	else if((m_PSR - PSR_b)>=0.015){
 		float curTraf = 0;
 		m_PSR = PSR_b;  // calculate the PSR
-		m_beta = fromPSRToBeta(m_PSR);
-		printf("The current beta is:");
-		printfFloat(m_beta);
-		printf("\n");
-		curTraf = fromBetaToTraffic(m_beta);
-		curTraf -= (m_delta*m_traffic);
-		m_traffic += curTraf;
-		m_beta = findOptimalBeta(m_traffic);
-		printf("The current beta is:");
-		printfFloat(m_beta);
-		printf("\n");
-		m_delta = findOptimalDelta(m_traffic,m_beta, m_PSR);
 		atomic{
+		
+			//m_beta = fromPSRToBeta(m_PSR);
+			m_beta = quan_beta(m_PSR);
+			
+			printf("The current beta is:");
+			printfFloat(m_beta);
+			printf("\n");
+			
+			curTraf = fromBetaToTraffic(m_beta);
+			curTraf -= (m_delta*m_traffic);
+			m_traffic += curTraf;
+			
+			//m_beta = findOptimalBeta(m_traffic);
+			m_beta = quan_opt_beta(m_traffic);
+			
+			printf("The expected beta is:");
+			printfFloat(m_beta);
+			printf("\n");
+			
+			m_delta = findOptimalDelta(m_beta, m_traffic,m_PSR);
+		
 			period = (float)thu/m_delta;
 		}	
 
@@ -431,26 +607,34 @@ module TestDeviceSenderC
 	}
 	else if((PSR_b - m_PSR)>=0.015){
 		m_PSR = PSR_b;  // calculate the PSR
-		m_beta = fromPSRToBeta(m_PSR);
-		printf("The current beta is:");
-		printfFloat(m_beta);
-		printf("\n");
-		m_traffic = fromBetaToTraffic(m_beta);
-		m_traffic /= m_delta;
-		m_beta = findOptimalBeta(m_traffic);
-		printf("The current beta is:");
-		printfFloat(m_beta);
-		printf("\n");
-		m_delta = findOptimalDelta(m_traffic,m_beta, m_PSR);
 		atomic{
+			//m_beta = fromPSRToBeta(m_PSR);
+			m_beta = quan_beta(m_PSR);
+		
+			printf("The current beta is:");
+			printfFloat(m_beta);
+			printf("\n");
+			
+			m_traffic = fromBetaToTraffic(m_beta);
+			m_traffic /= m_delta;
+			
+			//m_beta = findOptimalBeta(m_traffic);
+			m_beta = quan_opt_beta(m_traffic);
+			
+			printf("The expected beta is:");
+			printfFloat(m_beta);
+			printf("\n");
+			m_delta = findOptimalDelta(m_beta, m_traffic,m_PSR);
+		
 			period = (float)thu/m_delta;
 		}
-		printf("Case 2.\n");
+
 		
 	}
 	else{
 		printf("Nothing changes.\nThe current beta is:");
-		printfFloat(fromPSRToBeta(PSR_b));
+		//printfFloat(fromPSRToBeta(PSR_b));
+		printfFloat(quan_beta(PSR_b));
 		printf("\n");
 	}
 	m_numOfSuccess = 0;
@@ -461,7 +645,7 @@ module TestDeviceSenderC
   
   
   
-  void sendToSerial() {
+  task void sendToSerial() {
    /*
     if (locked) {
       return;
@@ -516,7 +700,7 @@ module TestDeviceSenderC
 	}
 	else{
 		call Leds.led0Off();
-		m_numOfTransmission++;
+		++m_numOfTransmission;
 		//trans2++;
 	}
 
@@ -531,10 +715,10 @@ module TestDeviceSenderC
                         )
   {
     if (status == IEEE154_SUCCESS ) {
-	  m_numOfSuccess++;
+	  ++m_numOfSuccess;
 	  call Leds.led1Toggle();
 	  if(m_numOfTransmission%100 == 0){
-		sendToSerial();
+		post sendToSerial();
 	  }
 	  //m_ledCount = 0;
 	
