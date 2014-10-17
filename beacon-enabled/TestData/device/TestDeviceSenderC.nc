@@ -40,7 +40,7 @@
 //#include "look_up_table.h"
 
 #define MAX(A,B) ((A)>(B))?(A):(B)
-//#define ABS(A) ((A)>=0)?((A):(-(A))) 
+#define LIST_LEN 11
 
 module TestDeviceSenderC
 {
@@ -81,26 +81,34 @@ module TestDeviceSenderC
   float m_beta;
   float m_delta;
   float m_traffic;
+  uint8_t nodeType = 1;
   uint16_t period;
-  uint16_t thu = 32000;
+  uint16_t thu;
   uint16_t interval = 0;
   bool locked = FALSE;
   message_t packet;
-  uint8_t nodeType = 1;
-  uint8_t timerFlag = 0;
   
-  bool late = TRUE;
+  uint8_t timerFlag = 0;
+ 
+  float betaList[LIST_LEN]={0};
+  float PSRList[LIST_LEN] = {0};
+  uint8_t j = 0;
+  
+  bool late = FALSE;
   
   uint16_t trans2 = 0;
 
 
   static void startApp();
   task void packetSendTask();
+  static uint16_t getRandomNumber();
 
 
   event void Boot.booted() {
     char payload[] = "He";
     uint8_t *payloadRegion;
+	period = 16000*nodeType+16000;
+	thu = 16000*nodeType+16000;
 
     m_payloadLen = strlen(payload);
     payloadRegion = call MACPacket.getPayload(&m_frame, m_payloadLen);
@@ -119,6 +127,8 @@ module TestDeviceSenderC
 
   static void startApp()
   {
+	
+  
     ieee154_phyChannelsSupported_t channelMask;
     uint8_t scanDuration = BEACON_ORDER;
 
@@ -202,17 +212,9 @@ module TestDeviceSenderC
           );
       // Initilize the packet transmission timer
 
-	  if (1==nodeType){
-		  period = 32000;
-	   }else if(2 == nodeType){
-		  period = 32000;
-	  } else if(3 == nodeType){
-		  period = 32000;
-	  } else if(4 == nodeType){
-		  period = 32000;
-	  }
+	  
 	  //call TimerSendPac.startOneShot(period);
-	  call TimerSendPac.start(period);
+	  call TimerSendPac.start(getRandomNumber());
 	  // Initialize the transmission rate adjustment algorithm
 	  call TimerChgPrd.startOneShot(60000);
 	  
@@ -220,12 +222,12 @@ module TestDeviceSenderC
       startApp();
   }
   
-  static uint16_t getRandomNumber(uint8_t bias){
+  static uint16_t getRandomNumber(){
 		uint16_t res = call Random.rand16();
-		uint16_t mask = 0xFFFF;
-		mask <<= bias;
-		mask = ~mask;
-		res &= mask;
+		//uint16_t mask = 0xFFFF;
+		//mask <<= bias;
+		//mask = ~mask;
+		//res &= mask;
 		return res;
   }
   
@@ -238,7 +240,6 @@ module TestDeviceSenderC
   
   async event void TimerSendPac.fired(){
 	 
-	//call TimerSendPac.start(0.9*period+getRandomNumber(0.2*period));
 	call TimerSendPac.start(period);
 	post packetSendTask();
 	 
@@ -267,274 +268,44 @@ module TestDeviceSenderC
 (uint8_t) f2);
    }
    
+   static float betaTable[] = {0.01, 0.03, 0.06, 0.09, 0.11, 0.14, 0.18, 0.20, 0.22, 0.23, 0.25, 0.27, 0.28, 0.29, 0.30, 0.31, 0.32, 0.33, 0.34, 0.36, 0.37, 0.38, 0.39, 0.40, 0.40, 0.41, 0.42, 0.43, 0.44, 0.44, 0.45, 0.46, 0.47, 0.47, 0.48, 0.48, 0.49, 0.50};
+   
    static float quan_beta(float PSR){
-
-	if(PSR>0.995)
-		return 0.01;
-	else if(PSR>0.990)
-		return 0.03;
-	else if(PSR>0.985)
-		return 0.06;
-	else if(PSR>0.980)
-		return 0.09;
-	else if(PSR>0.975)
-		return 0.11;
-	else if(PSR>0.970)
-		return 0.14;
-	else if(PSR>0.965)
-		return 0.16;
-	else if(PSR>0.960)
-		return 0.18;
-	else if(PSR>0.955)
-		return 0.20;
-	else if(PSR>0.950)
-		return 0.22;
-	else if(PSR>0.945)
-		return 0.23;
-	else if(PSR>0.940)
-		return 0.25;
-	else if(PSR>0.935)
-		return 0.27;
-	else if(PSR>0.930)
-		return 0.28;
-	else if(PSR>0.925)
-		return 0.30;
-	else if(PSR>0.920)
-		return 0.31;
-	else if(PSR>0.915)
-		return 0.32;
-	else if(PSR>0.910)
-		return 0.33;
-	else if(PSR>0.905)
-		return 0.34;
-	else if(PSR>0.900)
-		return 0.36;
-	else if(PSR>0.895)
-		return 0.37;
-	else if(PSR>0.890)
-		return 0.38;
-	else if(PSR>0.885)
-		return 0.39;
-	else if(PSR>0.880)
-		return 0.40;
-	else if(PSR>0.875)
-		return 0.40;
-	else if(PSR>0.870)
-		return 0.41;
-	else if(PSR>0.865)
-		return 0.42;
-	else if(PSR>0.860)
-		return 0.43;
-	else if(PSR>0.855)
-		return 0.44;
-	else if(PSR>0.850)
-		return 0.44;
-	else if(PSR>0.845)
-		return 0.45;
-	else if(PSR>0.840)
-		return 0.46;
-	else if(PSR>0.835)
-		return 0.47;
-	else if(PSR>0.830)
-		return 0.47;
-	else if(PSR>0.825)
-		return 0.48;
-	else if(PSR>0.820)
-		return 0.48;
-	else if(PSR>0.815)
-		return 0.49;
-	else if(PSR>0.810)
-		return 0.50;
-	else if(PSR>0.805)
-		return 0.50;
-	else if(PSR>0.800)
-		return 0.50;
+   
+	uint8_t index = 0;
+	index = (uint8_t)((1.0 - PSR) *200);
+   
+	if(index>37)
+		return 0.5;
 	else
-		return 0.60;
+		return betaTable[index];
+	   
 
 }
 
-static float quan_opt_beta(float traffic){
-	if(traffic<0.0025)
-		return 0.01;
-	else if(traffic<0.0050)
-		return 0.01;
-	else if(traffic<0.0075)
-		return 0.01;
-	else if(traffic<0.0100)
-		return 0.01;
-	else if(traffic<0.0125)
-		return 0.02;
-	else if(traffic<0.0150)
-		return 0.04;
-	else if(traffic<0.0175)
-		return 0.05;
-	else if(traffic<0.0200)
-		return 0.07;
-	else if(traffic<0.0225)
-		return 0.08;
-	else if(traffic<0.0250)
-		return 0.10;
-	else if(traffic<0.0275)
-		return 0.11;
-	else if(traffic<0.0300)
-		return 0.13;
-	else if(traffic<0.0325)
-		return 0.14;
-	else if(traffic<0.0350)
-		return 0.16;
-	else if(traffic<0.0375)
-		return 0.18;
-	else if(traffic<0.0400)
-		return 0.19;
-	else if(traffic<0.0425)
-		return 0.21;
-	else if(traffic<0.0450)
-		return 0.23;
-	else if(traffic<0.0475)
-		return 0.24;
-	else if(traffic<0.0500)
-		return 0.26;
-	else if(traffic<0.0525)
-		return 0.28;
-	else if(traffic<0.0550)
-		return 0.29;
-	else if(traffic<0.0575)
-		return 0.31;
-	else if(traffic<0.0600)
-		return 0.33;
-	else if(traffic<0.0625)
-		return 0.35;
-	else if(traffic<0.0650)
-		return 0.37;
-	else if(traffic<0.0675)
-		return 0.39;
-	else if(traffic<0.0700)
-		return 0.41;
-	else if(traffic<0.0725)
-		return 0.43;
-	else if(traffic<0.0750)
-		return 0.46;
-	else if(traffic<0.0775)
-		return 0.48;
-	else if(traffic<0.0800)
-		return 0.51;
-	else if(traffic<0.0825)
-		return 0.55;
-	else if(traffic<0.0850)
-		return 0.61;
-	else if(traffic<0.0875)
-		return 0.8;
-	else if(traffic<0.0900)
-		return 0.8;
-	else
-		return 0.8;
+	static float optBetaTable[] = {0.01, 0.01, 0.01, 0.01, 0.02, 0.04, 0.05, 0.07, 0.08, 0.10, 0.11, 0.13, 0.14, 0.16, 0.18, 0.19, 0.21, 0.23, 0.24, 0.26, 0.28, 0.29, 0.31, 0.33, 0.35, 0.37, 0.39, 0.41, 0.43, 0.46, 0.48, 0.51, 0.55};
 
-}
- /* 
-  float fromPSRToBeta(float PSR){
-	  float betaCan = 0;
-	  float PSRCan = 0;
-	  uint8_t i;
-	  
-	  float betaBest = 0;
-	  float dif = 100;
-	  
-	  if(PSR < 0.8)
-		  return 0.5;
-      else if (PSR <= 0.90){
-		  
-		  for(i =0;i<= 20;i++){
-			   betaCan = 0.30 + 0.01*i;
-			   PSRCan = (1.0-betaCan*betaCan*betaCan*betaCan*betaCan)*(1.0-betaCan/(1-betaCan)/6.0);
-			   
-			   if(abs(PSRCan - PSR)<dif){
-					dif = abs(PSRCan - PSR);
-					betaBest = betaCan;
-			   }
-			   
-			   if(dif < 0.008){
-					return betaBest;	
-			   }
-		  }
-		  return betaBest;
-	  }
-	  else {
-		  for(i =0;i<= 38;i++){
-			   betaCan = 0.01*i;
-			   PSRCan = (1.0-betaCan*betaCan*betaCan*betaCan*betaCan)*(1.0-betaCan/(1-betaCan)/6.0);
-			   
-			   if(abs(PSRCan - PSR)<dif){
-					dif = abs(PSRCan - PSR);
-					betaBest = betaCan;
-			   }
-			   
-			   if(dif < 0.008){
-					return betaBest;	
-			   }		   
-		  }
-		  return betaCan;
-	  }
-	
+	static float quan_opt_beta(float traffic){
+
+		uint8_t index = 0;
+		index = (uint8_t)(traffic*400);
+		if(index>32)
+			return 0.6;
+		else
+			return optBetaTable[index];
+
   }
-*/  
+ 
   static float fromBetaToTraffic(float beta){
 		return beta/(1-beta*beta*beta*beta*beta)/6.0;
   }
-/*
-  float findOptimalBeta(float traffic){
-	  float betaCan = 0;
-	  float trafCan;
-	  
-	  float betaBest = 0;
-	  float dif = 100;
-	  
-	  uint8_t i;
-	  
-	  if (traffic > 0.085)
-		  return 0.7;
-      else if (traffic <= 0.05){
-		 for(i =0;i<= 30;i++){
-			 betaCan = 0.01*i;
-			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
-			 
-			 if(abs(trafCan - traffic) < dif){
-				dif =abs(trafCan - traffic);
-				betaBest = betaCan;
-			 }
-			 
-			 if(dif < 0.002){
-					return betaBest;	
-			 }			   
-		 }
-		 return betaBest;
-	  }
-	  
-	  else{
-		 for(i =0;i<= 40;i++){
-			 betaCan = 0.2+0.01*i;
-			 trafCan = (betaCan-2*betaCan*betaCan-betaCan*betaCan*5.0+5.0*betaCan)/36.0/(1-betaCan);
-			 
-			 if(abs(trafCan - traffic) < dif){
-				dif = abs(trafCan - traffic);
-				betaBest = betaCan;
-			 }
-			 
-			 if(dif < 0.002){
-					return betaBest;	
-			 }				   
-		 }
-		 return betaBest;
-	  }
-	  
-  }
- */ 
+
   static float findOptimalDelta(float beta, float traffic, float PSR){
 		return MAX(beta/(1-beta*beta*beta*beta*beta)/(traffic)/6.0,1.0/PSR);
   }
   
   event void TimerChgPrd.fired(){
-    
+    float PSR_b = 0;
 	/*
 	if(timerFlag < 3){
 		timerFlag++;
@@ -542,9 +313,6 @@ static float quan_opt_beta(float traffic){
 		return;
 	}
 	*/
-	
-	
-	float PSR_b = 0;
 	
 	++interval;
 	
@@ -555,17 +323,14 @@ static float quan_opt_beta(float traffic){
 	
 		m_PSR = PSR_b;  // calculate the PSR
 		atomic{
-			//m_beta = fromPSRToBeta(m_PSR);
 			m_beta = quan_beta(m_PSR);
 			
 			m_traffic = fromBetaToTraffic(m_beta);
 		
 			if(late){		
-				//m_beta = findOptimalBeta(m_traffic*m_PSR);	
 				m_beta = quan_opt_beta(m_traffic*m_PSR);
 			}
 			else{		
-				//m_beta = findOptimalBeta(m_traffic);
 				m_beta = quan_opt_beta(m_traffic);
 			}
 			m_delta = findOptimalDelta(m_beta, m_traffic,m_PSR);		
@@ -575,12 +340,11 @@ static float quan_opt_beta(float traffic){
 
 	}
 	
-	else if((m_PSR - PSR_b)>=0.015){
+	else if((m_PSR - PSR_b)>=0.02){
 		float curTraf = 0;
 		m_PSR = PSR_b;  // calculate the PSR
 		atomic{
 		
-			//m_beta = fromPSRToBeta(m_PSR);
 			m_beta = quan_beta(m_PSR);
 			
 			printf("The current beta is:");
@@ -591,7 +355,6 @@ static float quan_opt_beta(float traffic){
 			curTraf -= (m_delta*m_traffic);
 			m_traffic += curTraf;
 			
-			//m_beta = findOptimalBeta(m_traffic);
 			m_beta = quan_opt_beta(m_traffic);
 			
 			printf("The expected beta is:");
@@ -605,10 +368,9 @@ static float quan_opt_beta(float traffic){
 
 	
 	}
-	else if((PSR_b - m_PSR)>=0.015){
+	else if((PSR_b - m_PSR)>=0.02){
 		m_PSR = PSR_b;  // calculate the PSR
 		atomic{
-			//m_beta = fromPSRToBeta(m_PSR);
 			m_beta = quan_beta(m_PSR);
 		
 			printf("The current beta is:");
@@ -618,7 +380,6 @@ static float quan_opt_beta(float traffic){
 			m_traffic = fromBetaToTraffic(m_beta);
 			m_traffic /= m_delta;
 			
-			//m_beta = findOptimalBeta(m_traffic);
 			m_beta = quan_opt_beta(m_traffic);
 			
 			printf("The expected beta is:");
@@ -632,11 +393,18 @@ static float quan_opt_beta(float traffic){
 		
 	}
 	else{
-		printf("Nothing changes.\nThe current beta is:");
-		//printfFloat(fromPSRToBeta(PSR_b));
+		printf("Nothing changes.\nThe current beta and PSR and period are:");
 		printfFloat(quan_beta(PSR_b));
+		printfFloat(PSR_b);
+		printf(" %d",period);
 		printf("\n");
 	}
+	
+	if(interval<=LIST_LEN-1){
+		betaList[interval] = quan_beta(PSR_b);
+		PSRList[interval] = PSR_b;
+	}
+	
 	m_numOfSuccess = 0;
 	m_numOfTransmission = 0;
     call TimerChgPrd.startOneShot(60000);
@@ -646,26 +414,7 @@ static float quan_opt_beta(float traffic){
   
   
   task void sendToSerial() {
-   /*
-    if (locked) {
-      return;
-    }
-    else {
-      test_serial_msg_t* rcm = (test_serial_msg_t*)call SerialPacket.getPayload(&packet, sizeof(test_serial_msg_t));
-      if (rcm == NULL) {return;}
-      if (call SerialPacket.maxPayloadLength() < sizeof(test_serial_msg_t)) {
-	return;
-      }
-	  
-      rcm->numOfTransmission = m_numOfTransmission;
-	  rcm->numOfSuccess = m_numOfSuccess;
-	  rcm->period = period;
-	  
-      if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(test_serial_msg_t)) == SUCCESS) {
-	locked = TRUE;
-      }
-    }
-	*/
+	
 	
 	printf("the number of transmission is %u.\n",m_numOfTransmission);
 	printf("the number of successful transmission is %u.\n",m_numOfSuccess);
@@ -673,6 +422,14 @@ static float quan_opt_beta(float traffic){
 	printfFloat(m_delta);
 	printfFloat(m_PSR);
 	printfFloat(m_traffic);
+	printf("\n");
+	
+	for(j=0;j<LIST_LEN;j++)
+		printfFloat(betaList[j]);
+	printf("\n");
+	
+	for(j=0;j<LIST_LEN;j++)
+		printfFloat(PSRList[j]);
 	printf("\n");
 	printfflush();
 	
@@ -696,6 +453,7 @@ static float quan_opt_beta(float traffic){
           ) != IEEE154_SUCCESS){
 	  //trans2++;
       call Leds.led0On();
+	  call TimerSendPac.stop();
 	
 	}
 	else{

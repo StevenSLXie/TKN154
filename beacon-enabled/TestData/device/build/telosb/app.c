@@ -5288,7 +5288,7 @@ uint8_t len);
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(
 # 47 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x41932200, 
+am_id_t arg_0x41939888, 
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -5339,7 +5339,7 @@ message_t *
 
 /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__default__receive(
 # 48 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x41932bc0, 
+am_id_t arg_0x41933298, 
 # 71 "/opt/tinyos-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -5408,7 +5408,7 @@ static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__receive
 # 75 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__send(
 # 51 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f6760, 
+uart_id_t arg_0x419f7010, 
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -5422,7 +5422,7 @@ uint8_t len);
 #line 100
 static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(
 # 51 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f6760, 
+uart_id_t arg_0x419f7010, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -5440,7 +5440,7 @@ message_t *
 
 /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__default__receive(
 # 50 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f6120, 
+uart_id_t arg_0x419fa968, 
 # 71 "/opt/tinyos-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -5453,17 +5453,17 @@ uint8_t len);
 # 31 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__upperLength(
 # 54 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f52a0, 
+uart_id_t arg_0x419f7b10, 
 # 31 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t dataLinkLen);
 #line 15
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(
 # 54 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f52a0);
+uart_id_t arg_0x419f7b10);
 # 23 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(
 # 54 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f52a0, 
+uart_id_t arg_0x419f7b10, 
 # 23 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t upperLen);
 # 81 "/opt/tinyos-2.1.2/tos/lib/serial/SendBytePacket.nc"
@@ -5525,19 +5525,19 @@ static error_t HdlcTranslateC__SerialFrameComm__putData(uint8_t data);
 # 65 "/opt/tinyos-2.1.2/tos/interfaces/ResourceConfigure.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__ResourceConfigure__unconfigure(
 # 44 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4f4f0);
+uint8_t arg_0x41a50230);
 # 59 "/opt/tinyos-2.1.2/tos/interfaces/ResourceConfigure.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__ResourceConfigure__configure(
 # 44 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4f4f0);
+uint8_t arg_0x41a50230);
 # 39 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartConfigure.nc"
 static msp430_uart_union_config_t */*Msp430Uart1P.UartP*/Msp430UartP__0__Msp430UartConfigure__default__getConfig(
 # 49 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4ca88);
+uint8_t arg_0x41a4d7e0);
 # 48 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__send(
 # 45 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4fc50, 
+uint8_t arg_0x41a50990, 
 # 44 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 uint8_t * buf, 
 
@@ -5547,13 +5547,13 @@ uint16_t len);
 #line 79
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__receivedByte(
 # 45 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4fc50, 
+uint8_t arg_0x41a50990, 
 # 79 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 uint8_t byte);
 #line 99
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__receiveDone(
 # 45 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4fc50, 
+uint8_t arg_0x41a50990, 
 # 95 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 uint8_t * buf, 
 
@@ -5563,7 +5563,7 @@ uint16_t len, error_t error);
 #line 57
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__sendDone(
 # 45 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4fc50, 
+uint8_t arg_0x41a50990, 
 # 53 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 uint8_t * buf, 
 
@@ -5575,41 +5575,41 @@ static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Counter__overflow(void );
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__release(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4c030);
+uint8_t arg_0x41a4fd70);
 # 97 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__immediateRequest(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4c030);
+uint8_t arg_0x41a4fd70);
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__granted(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4c030);
+uint8_t arg_0x41a4fd70);
 # 128 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static bool /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__isOwner(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4c030);
+uint8_t arg_0x41a4fd70);
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__release(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a52a88);
+uint8_t arg_0x41a537b8);
 # 97 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__immediateRequest(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a52a88);
+uint8_t arg_0x41a537b8);
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__granted(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a52a88);
+uint8_t arg_0x41a537b8);
 # 54 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/HplMsp430UsartInterrupts.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartInterrupts__rxDone(
 # 51 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a49b30, 
+uint8_t arg_0x41a4a890, 
 # 54 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/HplMsp430UsartInterrupts.nc"
 uint8_t data);
 #line 49
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartInterrupts__txDone(
 # 51 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a49b30);
+uint8_t arg_0x41a4a890);
 # 143 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/HplMsp430Usart.nc"
 static void HplMsp430Usart1P__Usart__enableUartRx(void );
 #line 123
@@ -5772,7 +5772,7 @@ error_t error);
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x41b4aa70, 
+am_id_t arg_0x41b4ba70, 
 # 103 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -5785,7 +5785,7 @@ error_t error);
 # 75 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x41b4a088, 
+uint8_t arg_0x41b4b088, 
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -5799,7 +5799,7 @@ uint8_t len);
 #line 100
 static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x41b4a088, 
+uint8_t arg_0x41b4b088, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -12533,6 +12533,8 @@ static error_t TestDeviceSenderC__BeaconFrame__parsePANDescriptor(message_t *fra
 uint8_t ChannelPage, ieee154_PANDescriptor_t *pdescriptor);
 #line 140
 static uint8_t TestDeviceSenderC__BeaconFrame__getBSN(message_t *frame);
+# 52 "/opt/tinyos-2.1.2/tos/interfaces/Random.nc"
+static uint16_t TestDeviceSenderC__Random__rand16(void );
 # 67 "/opt/tinyos-2.1.2/tos/interfaces/TaskBasic.nc"
 static error_t TestDeviceSenderC__packetSendTask__postTask(void );
 #line 67
@@ -12611,19 +12613,19 @@ bool TrackBeacon);
 # 69 "/opt/tinyos-2.1.2/tos/lib/mac/tkn154/interfaces/MLME/MLME_RESET.nc"
 static ieee154_status_t TestDeviceSenderC__MLME_RESET__request(
 bool SetDefaultPIB);
-# 98 "TestDeviceSenderC.nc"
+# 103 "TestDeviceSenderC.nc"
 enum TestDeviceSenderC____nesc_unnamed4421 {
-#line 98
+#line 103
   TestDeviceSenderC__packetSendTask = 33U
 };
-#line 98
+#line 103
 typedef int TestDeviceSenderC____nesc_sillytask_packetSendTask[TestDeviceSenderC__packetSendTask];
-#line 648
+#line 416
 enum TestDeviceSenderC____nesc_unnamed4422 {
-#line 648
+#line 416
   TestDeviceSenderC__sendToSerial = 34U
 };
-#line 648
+#line 416
 typedef int TestDeviceSenderC____nesc_sillytask_sendToSerial[TestDeviceSenderC__sendToSerial];
 #line 73
 message_t TestDeviceSenderC__m_frame;
@@ -12637,25 +12639,31 @@ float TestDeviceSenderC__m_PSR = 0;
 float TestDeviceSenderC__m_beta;
 float TestDeviceSenderC__m_delta;
 float TestDeviceSenderC__m_traffic;
+uint8_t TestDeviceSenderC__nodeType = 1;
 uint16_t TestDeviceSenderC__period;
-uint16_t TestDeviceSenderC__thu = 32000;
+uint16_t TestDeviceSenderC__thu;
 uint16_t TestDeviceSenderC__interval = 0;
 bool TestDeviceSenderC__locked = FALSE;
 message_t TestDeviceSenderC__packet;
-uint8_t TestDeviceSenderC__nodeType = 1;
 
 
-bool TestDeviceSenderC__late = TRUE;
+
+float TestDeviceSenderC__betaList[11] = { 0 };
+float TestDeviceSenderC__PSRList[11] = { 0 };
+uint8_t TestDeviceSenderC__j = 0;
+
+bool TestDeviceSenderC__late = FALSE;
 
 
 
 
 static void TestDeviceSenderC__startApp(void );
 
+inline static uint16_t TestDeviceSenderC__getRandomNumber(void );
 
 
 static void TestDeviceSenderC__Boot__booted(void );
-#line 114
+#line 122
 static inline void TestDeviceSenderC__MLME_RESET__confirm(ieee154_status_t status);
 
 
@@ -12663,9 +12671,9 @@ static inline void TestDeviceSenderC__MLME_RESET__confirm(ieee154_status_t statu
 
 
 static void TestDeviceSenderC__startApp(void );
-#line 150
+#line 160
 static message_t *TestDeviceSenderC__MLME_BEACON_NOTIFY__indication(message_t *frame);
-#line 179
+#line 189
 static inline void TestDeviceSenderC__MLME_SCAN__confirm(
 ieee154_status_t status, 
 uint8_t ScanType, 
@@ -12675,7 +12683,9 @@ uint8_t EnergyDetectListNumEntries,
 int8_t *EnergyDetectList, 
 uint8_t PANDescriptorListNumEntries, 
 ieee154_PANDescriptor_t *PANDescriptorList);
-#line 239
+#line 225
+inline static uint16_t TestDeviceSenderC__getRandomNumber(void );
+#line 241
 static inline void TestDeviceSenderC__TimerSendPac__fired(void );
 
 
@@ -12683,31 +12693,45 @@ static inline void TestDeviceSenderC__TimerSendPac__fired(void );
 
 
 
-
 static void TestDeviceSenderC__printfFloat(float toBePrinted);
-#line 270
+#line 271
+static float TestDeviceSenderC__betaTable[38] = { 0.01, 0.03, 0.06, 0.09, 0.11, 0.14, 0.18, 0.20, 0.22, 0.23, 0.25, 0.27, 0.28, 0.29, 0.30, 0.31, 0.32, 0.33, 0.34, 0.36, 0.37, 0.38, 0.39, 0.40, 0.40, 0.41, 0.42, 0.43, 0.44, 0.44, 0.45, 0.46, 0.47, 0.47, 0.48, 0.48, 0.49, 0.50 };
+
 static float TestDeviceSenderC__quan_beta(float PSR);
-#line 357
+#line 286
+static float TestDeviceSenderC__optBetaTable[33] = { 0.01, 0.01, 0.01, 0.01, 0.02, 0.04, 0.05, 0.07, 0.08, 0.10, 0.11, 0.13, 0.14, 0.16, 0.18, 0.19, 0.21, 0.23, 0.24, 0.26, 0.28, 0.29, 0.31, 0.33, 0.35, 0.37, 0.39, 0.41, 0.43, 0.46, 0.48, 0.51, 0.55 };
+
 static float TestDeviceSenderC__quan_opt_beta(float traffic);
-#line 481
+
+
+
+
+
+
+
+
+
+
 static float TestDeviceSenderC__fromBetaToTraffic(float beta);
-#line 532
+
+
+
 static float TestDeviceSenderC__findOptimalDelta(float beta, float traffic, float PSR);
 
 
 
 static inline void TestDeviceSenderC__TimerChgPrd__fired(void );
-#line 648
+#line 416
 static inline void TestDeviceSenderC__sendToSerial__runTask(void );
-#line 683
+#line 440
 static inline void TestDeviceSenderC__packetSendTask__runTask(void );
-#line 710
+#line 468
 static inline void TestDeviceSenderC__MCPS_DATA__confirm(
 message_t *msg, 
 uint8_t msduHandle, 
 ieee154_status_t status, 
 uint32_t timestamp);
-#line 730
+#line 488
 static void TestDeviceSenderC__MLME_SYNC_LOSS__indication(
 ieee154_status_t lossReason, 
 uint16_t PANId, 
@@ -12753,7 +12777,7 @@ uint8_t len);
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(
 # 47 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x41932200, 
+am_id_t arg_0x41939888, 
 # 103 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -12772,7 +12796,7 @@ message_t *
 
 /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__receive(
 # 48 "/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageP.nc"
-am_id_t arg_0x41932bc0, 
+am_id_t arg_0x41933298, 
 # 71 "/opt/tinyos-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -13257,7 +13281,7 @@ static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__rece
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(
 # 51 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f6760, 
+uart_id_t arg_0x419f7010, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -13275,7 +13299,7 @@ message_t *
 
 /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__receive(
 # 50 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f6120, 
+uart_id_t arg_0x419fa968, 
 # 71 "/opt/tinyos-2.1.2/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -13288,17 +13312,17 @@ uint8_t len);
 # 31 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__upperLength(
 # 54 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f52a0, 
+uart_id_t arg_0x419f7b10, 
 # 31 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t dataLinkLen);
 #line 15
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(
 # 54 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f52a0);
+uart_id_t arg_0x419f7b10);
 # 23 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(
 # 54 "/opt/tinyos-2.1.2/tos/lib/serial/SerialDispatcherP.nc"
-uart_id_t arg_0x419f52a0, 
+uart_id_t arg_0x419f7b10, 
 # 23 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
 message_t *msg, uint8_t upperLen);
 # 71 "/opt/tinyos-2.1.2/tos/lib/serial/SendBytePacket.nc"
@@ -13497,7 +13521,7 @@ static inline void HdlcTranslateC__UartStream__receiveDone(uint8_t *buf, uint16_
 # 39 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartConfigure.nc"
 static msp430_uart_union_config_t */*Msp430Uart1P.UartP*/Msp430UartP__0__Msp430UartConfigure__getConfig(
 # 49 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4ca88);
+uint8_t arg_0x41a4d7e0);
 # 97 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/HplMsp430Usart.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Usart__resetUsart(bool reset);
 #line 179
@@ -13514,13 +13538,13 @@ static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Usart__setModeUart(msp430_uart
 # 79 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receivedByte(
 # 45 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4fc50, 
+uint8_t arg_0x41a50990, 
 # 79 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 uint8_t byte);
 #line 99
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receiveDone(
 # 45 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4fc50, 
+uint8_t arg_0x41a50990, 
 # 95 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 uint8_t * buf, 
 
@@ -13530,7 +13554,7 @@ uint16_t len, error_t error);
 #line 57
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__sendDone(
 # 45 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4fc50, 
+uint8_t arg_0x41a50990, 
 # 53 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
 uint8_t * buf, 
 
@@ -13540,19 +13564,19 @@ uint16_t len, error_t error);
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__release(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4c030);
+uint8_t arg_0x41a4fd70);
 # 97 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__immediateRequest(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4c030);
+uint8_t arg_0x41a4fd70);
 # 128 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static bool /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__isOwner(
 # 48 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a4c030);
+uint8_t arg_0x41a4fd70);
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
 static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(
 # 43 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartP.nc"
-uint8_t arg_0x41a52a88);
+uint8_t arg_0x41a537b8);
 #line 59
 uint16_t /*Msp430Uart1P.UartP*/Msp430UartP__0__m_tx_len;
 #line 59
@@ -14020,7 +14044,7 @@ static inline void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__Se
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(
 # 48 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x41b4aa70, 
+am_id_t arg_0x41b4ba70, 
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 71
@@ -14037,7 +14061,7 @@ uint8_t len);
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(
 # 46 "/opt/tinyos-2.1.2/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x41b4a088, 
+uint8_t arg_0x41b4b088, 
 # 96 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -14506,11 +14530,10 @@ inline static void TestDeviceSenderC__TimerSendPac__start(TestDeviceSenderC__Tim
 #line 66
 }
 #line 66
-# 239 "TestDeviceSenderC.nc"
+# 241 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__TimerSendPac__fired(void )
-#line 239
+#line 241
 {
-
 
   TestDeviceSenderC__TimerSendPac__start(TestDeviceSenderC__period);
   TestDeviceSenderC__packetSendTask__postTask();
@@ -23304,13 +23327,13 @@ inline static void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AM
 }
 #line 162
 # 80 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
-inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x41b4aa70, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x41b4ba70, am_addr_t addr, message_t * msg, uint8_t len){
 #line 80
   unsigned char __nesc_result;
 #line 80
 
 #line 80
-  __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x41b4aa70, addr, msg, len);
+  __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x41b4ba70, addr, msg, len);
 #line 80
 
 #line 80
@@ -23509,13 +23532,13 @@ uint8_t upperLen)
 }
 
 # 23 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(uart_id_t arg_0x419f52a0, message_t *msg, uint8_t upperLen){
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(uart_id_t arg_0x419f7b10, message_t *msg, uint8_t upperLen){
 #line 23
   unsigned char __nesc_result;
 #line 23
 
 #line 23
-  switch (arg_0x419f52a0) {
+  switch (arg_0x419f7b10) {
 #line 23
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 23
@@ -23525,7 +23548,7 @@ inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 #line 23
     default:
 #line 23
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(arg_0x419f52a0, msg, upperLen);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(arg_0x419f7b10, msg, upperLen);
 #line 23
       break;
 #line 23
@@ -23552,13 +23575,13 @@ static inline uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 }
 
 # 15 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(uart_id_t arg_0x419f52a0){
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(uart_id_t arg_0x419f7b10){
 #line 15
   unsigned char __nesc_result;
 #line 15
 
 #line 15
-  switch (arg_0x419f52a0) {
+  switch (arg_0x419f7b10) {
 #line 15
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 15
@@ -23568,7 +23591,7 @@ inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 #line 15
     default:
 #line 15
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(arg_0x419f52a0);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(arg_0x419f7b10);
 #line 15
       break;
 #line 15
@@ -23682,9 +23705,9 @@ static inline void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default
 }
 
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
-inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x41b4a088, message_t * msg, error_t error){
+inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x41b4b088, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x41b4a088) {
+  switch (arg_0x41b4b088) {
 #line 100
     case 0U:
 #line 100
@@ -23694,7 +23717,7 @@ inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDon
 #line 100
     default:
 #line 100
-      /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x41b4a088, msg, error);
+      /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x41b4b088, msg, error);
 #line 100
       break;
 #line 100
@@ -23924,9 +23947,9 @@ static inline void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__gran
 }
 
 # 102 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
-inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(uint8_t arg_0x41a52a88){
+inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(uint8_t arg_0x41a537b8){
 #line 102
-  switch (arg_0x41a52a88) {
+  switch (arg_0x41a537b8) {
 #line 102
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 102
@@ -23936,7 +23959,7 @@ inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__granted(uint8
 #line 102
     default:
 #line 102
-      /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__granted(arg_0x41a52a88);
+      /*Msp430Uart1P.UartP*/Msp430UartP__0__Resource__default__granted(arg_0x41a537b8);
 #line 102
       break;
 #line 102
@@ -24036,13 +24059,13 @@ static inline msp430_uart_union_config_t */*Msp430Uart1P.UartP*/Msp430UartP__0__
 }
 
 # 39 "/opt/tinyos-2.1.2/tos/chips/msp430/usart/Msp430UartConfigure.nc"
-inline static msp430_uart_union_config_t */*Msp430Uart1P.UartP*/Msp430UartP__0__Msp430UartConfigure__getConfig(uint8_t arg_0x41a4ca88){
+inline static msp430_uart_union_config_t */*Msp430Uart1P.UartP*/Msp430UartP__0__Msp430UartConfigure__getConfig(uint8_t arg_0x41a4d7e0){
 #line 39
   union __nesc_unnamed4307 *__nesc_result;
 #line 39
 
 #line 39
-  switch (arg_0x41a4ca88) {
+  switch (arg_0x41a4d7e0) {
 #line 39
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 39
@@ -24052,7 +24075,7 @@ inline static msp430_uart_union_config_t */*Msp430Uart1P.UartP*/Msp430UartP__0__
 #line 39
     default:
 #line 39
-      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__Msp430UartConfigure__default__getConfig(arg_0x41a4ca88);
+      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__Msp430UartConfigure__default__getConfig(arg_0x41a4d7e0);
 #line 39
       break;
 #line 39
@@ -24351,9 +24374,9 @@ inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__Usart__enableIntr(void 
 #line 182
 }
 #line 182
-# 752 "TestDeviceSenderC.nc"
+# 510 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__AMSend__sendDone(message_t *bufPtr, error_t error)
-#line 752
+#line 510
 {
   if (&TestDeviceSenderC__packet == bufPtr) {
       TestDeviceSenderC__locked = FALSE;
@@ -24381,11 +24404,11 @@ static inline void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendD
 }
 
 # 110 "/opt/tinyos-2.1.2/tos/interfaces/AMSend.nc"
-inline static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(am_id_t arg_0x41932200, message_t * msg, error_t error){
+inline static void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__sendDone(am_id_t arg_0x41939888, message_t * msg, error_t error){
 #line 110
-  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x41932200, msg, error);
+  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(arg_0x41939888, msg, error);
 #line 110
-  switch (arg_0x41932200) {
+  switch (arg_0x41939888) {
 #line 110
     case AM_TEST_SERIAL_MSG:
 #line 110
@@ -24412,9 +24435,9 @@ static inline void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
 }
 
 # 100 "/opt/tinyos-2.1.2/tos/interfaces/Send.nc"
-inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(uart_id_t arg_0x419f6760, message_t * msg, error_t error){
+inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__sendDone(uart_id_t arg_0x419f7010, message_t * msg, error_t error){
 #line 100
-  switch (arg_0x419f6760) {
+  switch (arg_0x419f7010) {
 #line 100
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 100
@@ -24424,7 +24447,7 @@ inline static void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
 #line 100
     default:
 #line 100
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(arg_0x419f6760, msg, error);
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__default__sendDone(arg_0x419f7010, msg, error);
 #line 100
       break;
 #line 100
@@ -24473,13 +24496,13 @@ static inline message_t */*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Rec
 }
 
 # 78 "/opt/tinyos-2.1.2/tos/interfaces/Receive.nc"
-inline static message_t * /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__receive(am_id_t arg_0x41932bc0, message_t * msg, void * payload, uint8_t len){
+inline static message_t * /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__receive(am_id_t arg_0x41933298, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-    __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__default__receive(arg_0x41932bc0, msg, payload, len);
+    __nesc_result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Receive__default__receive(arg_0x41933298, msg, payload, len);
 #line 78
 
 #line 78
@@ -24504,13 +24527,13 @@ uint8_t len)
 }
 
 # 78 "/opt/tinyos-2.1.2/tos/interfaces/Receive.nc"
-inline static message_t * /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__receive(uart_id_t arg_0x419f6120, message_t * msg, void * payload, uint8_t len){
+inline static message_t * /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__receive(uart_id_t arg_0x419fa968, message_t * msg, void * payload, uint8_t len){
 #line 78
   nx_struct message_t *__nesc_result;
 #line 78
 
 #line 78
-  switch (arg_0x419f6120) {
+  switch (arg_0x419fa968) {
 #line 78
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 78
@@ -24520,7 +24543,7 @@ inline static message_t * /*SerialDispatcherC.SerialDispatcherP*/SerialDispatche
 #line 78
     default:
 #line 78
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__default__receive(arg_0x419f6120, msg, payload, len);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Receive__default__receive(arg_0x419fa968, msg, payload, len);
 #line 78
       break;
 #line 78
@@ -24548,13 +24571,13 @@ uint8_t dataLinkLen)
 }
 
 # 31 "/opt/tinyos-2.1.2/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__upperLength(uart_id_t arg_0x419f52a0, message_t *msg, uint8_t dataLinkLen){
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__upperLength(uart_id_t arg_0x419f7b10, message_t *msg, uint8_t dataLinkLen){
 #line 31
   unsigned char __nesc_result;
 #line 31
 
 #line 31
-  switch (arg_0x419f52a0) {
+  switch (arg_0x419f7b10) {
 #line 31
     case TOS_SERIAL_ACTIVE_MESSAGE_ID:
 #line 31
@@ -24564,7 +24587,7 @@ inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__
 #line 31
     default:
 #line 31
-      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__upperLength(arg_0x419f52a0, msg, dataLinkLen);
+      __nesc_result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__upperLength(arg_0x419f7b10, msg, dataLinkLen);
 #line 31
       break;
 #line 31
@@ -24610,9 +24633,9 @@ static inline void /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__
     __nesc_atomic_end(__nesc_atomic); }
 }
 
-# 759 "TestDeviceSenderC.nc"
+# 517 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__Control__stopDone(error_t err)
-#line 759
+#line 517
 {
 }
 
@@ -24889,13 +24912,13 @@ static inline error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__defau
 }
 
 # 120 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
-inline static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__release(uint8_t arg_0x41a4c030){
+inline static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__release(uint8_t arg_0x41a4fd70){
 #line 120
   unsigned char __nesc_result;
 #line 120
 
 #line 120
-  switch (arg_0x41a4c030) {
+  switch (arg_0x41a4fd70) {
 #line 120
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 120
@@ -24905,7 +24928,7 @@ inline static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__relea
 #line 120
     default:
 #line 120
-      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__release(arg_0x41a4c030);
+      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__release(arg_0x41a4fd70);
 #line 120
       break;
 #line 120
@@ -24926,13 +24949,13 @@ static inline bool /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default_
 }
 
 # 128 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
-inline static bool /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__isOwner(uint8_t arg_0x41a4c030){
+inline static bool /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__isOwner(uint8_t arg_0x41a4fd70){
 #line 128
   unsigned char __nesc_result;
 #line 128
 
 #line 128
-  switch (arg_0x41a4c030) {
+  switch (arg_0x41a4fd70) {
 #line 128
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 128
@@ -24942,7 +24965,7 @@ inline static bool /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__isOwner(
 #line 128
     default:
 #line 128
-      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__isOwner(arg_0x41a4c030);
+      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__isOwner(arg_0x41a4fd70);
 #line 128
       break;
 #line 128
@@ -25057,9 +25080,9 @@ static inline void SerialP__stopDoneTask__runTask(void )
   SerialP__SerialFlush__flush();
 }
 
-# 758 "TestDeviceSenderC.nc"
+# 516 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__Control__startDone(error_t err)
-#line 758
+#line 516
 {
 }
 
@@ -25243,13 +25266,13 @@ static inline error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__defau
 }
 
 # 97 "/opt/tinyos-2.1.2/tos/interfaces/Resource.nc"
-inline static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__immediateRequest(uint8_t arg_0x41a4c030){
+inline static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__immediateRequest(uint8_t arg_0x41a4fd70){
 #line 97
   unsigned char __nesc_result;
 #line 97
 
 #line 97
-  switch (arg_0x41a4c030) {
+  switch (arg_0x41a4fd70) {
 #line 97
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 97
@@ -25259,7 +25282,7 @@ inline static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__immed
 #line 97
     default:
 #line 97
-      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__immediateRequest(arg_0x41a4c030);
+      __nesc_result = /*Msp430Uart1P.UartP*/Msp430UartP__0__UsartResource__default__immediateRequest(arg_0x41a4fd70);
 #line 97
       break;
 #line 97
@@ -25631,17 +25654,26 @@ inline static error_t HdlcTranslateC__UartStream__send(uint8_t * buf, uint16_t l
 #line 48
 }
 #line 48
-# 648 "TestDeviceSenderC.nc"
+# 416 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__sendToSerial__runTask(void )
-#line 648
+#line 416
 {
-#line 670
+
+
   printf("the number of transmission is %u.\n", TestDeviceSenderC__m_numOfTransmission);
   printf("the number of successful transmission is %u.\n", TestDeviceSenderC__m_numOfSuccess);
   TestDeviceSenderC__printfFloat(TestDeviceSenderC__m_beta);
   TestDeviceSenderC__printfFloat(TestDeviceSenderC__m_delta);
   TestDeviceSenderC__printfFloat(TestDeviceSenderC__m_PSR);
   TestDeviceSenderC__printfFloat(TestDeviceSenderC__m_traffic);
+  printf("\n");
+
+  for (TestDeviceSenderC__j = 0; TestDeviceSenderC__j < 11; TestDeviceSenderC__j++) 
+    TestDeviceSenderC__printfFloat(TestDeviceSenderC__betaList[TestDeviceSenderC__j]);
+  printf("\n");
+
+  for (TestDeviceSenderC__j = 0; TestDeviceSenderC__j < 11; TestDeviceSenderC__j++) 
+    TestDeviceSenderC__printfFloat(TestDeviceSenderC__PSRList[TestDeviceSenderC__j]);
   printf("\n");
   printfflush();
 }
@@ -25678,6 +25710,19 @@ inline static void TestDeviceSenderC__Leds__led0Off(void ){
 #line 61
 }
 #line 61
+# 65 "/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430AlarmC.nc"
+static inline void /*TestDataAppC.TimerSendPac.Msp430Alarm*/Msp430AlarmC__3__Alarm__stop(void )
+{
+  /*TestDataAppC.TimerSendPac.Msp430Alarm*/Msp430AlarmC__3__Msp430TimerControl__disableEvents();
+}
+
+# 73 "/opt/tinyos-2.1.2/tos/lib/timer/Alarm.nc"
+inline static void TestDeviceSenderC__TimerSendPac__stop(void ){
+#line 73
+  /*TestDataAppC.TimerSendPac.Msp430Alarm*/Msp430AlarmC__3__Alarm__stop();
+#line 73
+}
+#line 73
 # 53 "/opt/tinyos-2.1.2/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 inline static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__HplGeneralIO__clr(void ){
 #line 53
@@ -26413,20 +26458,7 @@ inline static ieee154_status_t TestDeviceSenderC__MCPS_DATA__request(message_t *
 #line 74
 }
 #line 74
-# 65 "/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430AlarmC.nc"
-static inline void /*TestDataAppC.TimerSendPac.Msp430Alarm*/Msp430AlarmC__3__Alarm__stop(void )
-{
-  /*TestDataAppC.TimerSendPac.Msp430Alarm*/Msp430AlarmC__3__Msp430TimerControl__disableEvents();
-}
-
-# 73 "/opt/tinyos-2.1.2/tos/lib/timer/Alarm.nc"
-inline static void TestDeviceSenderC__TimerSendPac__stop(void ){
-#line 73
-  /*TestDataAppC.TimerSendPac.Msp430Alarm*/Msp430AlarmC__3__Alarm__stop();
-#line 73
-}
-#line 73
-# 683 "TestDeviceSenderC.nc"
+# 440 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__packetSendTask__runTask(void )
 {
   if (!TestDeviceSenderC__m_wasScanSuccessful) {
@@ -26441,7 +26473,7 @@ static inline void TestDeviceSenderC__packetSendTask__runTask(void )
 
 
     if (
-#line 691
+#line 448
     TestDeviceSenderC__MCPS_DATA__request(
     &TestDeviceSenderC__m_frame, 
     TestDeviceSenderC__m_payloadLen, 
@@ -26450,6 +26482,7 @@ static inline void TestDeviceSenderC__packetSendTask__runTask(void )
      != IEEE154_SUCCESS) {
 
         TestDeviceSenderC__Leds__led0On();
+        TestDeviceSenderC__TimerSendPac__stop();
       }
     else 
       {
@@ -27255,21 +27288,18 @@ inline static void TestDeviceSenderC__TimerChgPrd__startOneShot(uint32_t dt){
 #line 73
 }
 #line 73
-# 536 "TestDeviceSenderC.nc"
+# 307 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__TimerChgPrd__fired(void )
-#line 536
+#line 307
 {
-
-
-
-
-
-
-
-
-
-
   float PSR_b = 0;
+
+
+
+
+
+
+
 
   ++TestDeviceSenderC__interval;
 
@@ -27280,39 +27310,35 @@ static inline void TestDeviceSenderC__TimerChgPrd__fired(void )
 
       TestDeviceSenderC__m_PSR = PSR_b;
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 557
+#line 325
         {
-
           TestDeviceSenderC__m_beta = TestDeviceSenderC__quan_beta(TestDeviceSenderC__m_PSR);
 
           TestDeviceSenderC__m_traffic = TestDeviceSenderC__fromBetaToTraffic(TestDeviceSenderC__m_beta);
 
           if (TestDeviceSenderC__late) {
-
               TestDeviceSenderC__m_beta = TestDeviceSenderC__quan_opt_beta(TestDeviceSenderC__m_traffic * TestDeviceSenderC__m_PSR);
             }
           else {
-
               TestDeviceSenderC__m_beta = TestDeviceSenderC__quan_opt_beta(TestDeviceSenderC__m_traffic);
             }
           TestDeviceSenderC__m_delta = TestDeviceSenderC__findOptimalDelta(TestDeviceSenderC__m_beta, TestDeviceSenderC__m_traffic, TestDeviceSenderC__m_PSR);
           TestDeviceSenderC__period = (float )TestDeviceSenderC__thu / TestDeviceSenderC__m_delta;
         }
-#line 573
+#line 338
         __nesc_atomic_end(__nesc_atomic); }
     }
   else {
 
 
-    if (TestDeviceSenderC__m_PSR - PSR_b >= 0.015) {
+    if (TestDeviceSenderC__m_PSR - PSR_b >= 0.02) {
         float curTraf = 0;
 
-#line 580
+#line 345
         TestDeviceSenderC__m_PSR = PSR_b;
         { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 581
+#line 346
           {
-
 
             TestDeviceSenderC__m_beta = TestDeviceSenderC__quan_beta(TestDeviceSenderC__m_PSR);
 
@@ -27324,7 +27350,6 @@ static inline void TestDeviceSenderC__TimerChgPrd__fired(void )
             curTraf -= TestDeviceSenderC__m_delta * TestDeviceSenderC__m_traffic;
             TestDeviceSenderC__m_traffic += curTraf;
 
-
             TestDeviceSenderC__m_beta = TestDeviceSenderC__quan_opt_beta(TestDeviceSenderC__m_traffic);
 
             printf("The expected beta is:");
@@ -27335,17 +27360,16 @@ static inline void TestDeviceSenderC__TimerChgPrd__fired(void )
 
             TestDeviceSenderC__period = (float )TestDeviceSenderC__thu / TestDeviceSenderC__m_delta;
           }
-#line 604
+#line 367
           __nesc_atomic_end(__nesc_atomic); }
       }
     else {
 
-      if (PSR_b - TestDeviceSenderC__m_PSR >= 0.015) {
+      if (PSR_b - TestDeviceSenderC__m_PSR >= 0.02) {
           TestDeviceSenderC__m_PSR = PSR_b;
           { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 610
+#line 373
             {
-
               TestDeviceSenderC__m_beta = TestDeviceSenderC__quan_beta(TestDeviceSenderC__m_PSR);
 
               printf("The current beta is:");
@@ -27354,7 +27378,6 @@ static inline void TestDeviceSenderC__TimerChgPrd__fired(void )
 
               TestDeviceSenderC__m_traffic = TestDeviceSenderC__fromBetaToTraffic(TestDeviceSenderC__m_beta);
               TestDeviceSenderC__m_traffic /= TestDeviceSenderC__m_delta;
-
 
               TestDeviceSenderC__m_beta = TestDeviceSenderC__quan_opt_beta(TestDeviceSenderC__m_traffic);
 
@@ -27365,20 +27388,26 @@ static inline void TestDeviceSenderC__TimerChgPrd__fired(void )
 
               TestDeviceSenderC__period = (float )TestDeviceSenderC__thu / TestDeviceSenderC__m_delta;
             }
-#line 630
+#line 391
             __nesc_atomic_end(__nesc_atomic); }
         }
       else 
 
         {
-          printf("Nothing changes.\nThe current beta is:");
-
+          printf("Nothing changes.\nThe current beta and PSR and period are:");
           TestDeviceSenderC__printfFloat(TestDeviceSenderC__quan_beta(PSR_b));
+          TestDeviceSenderC__printfFloat(PSR_b);
+          printf(" %d", TestDeviceSenderC__period);
           printf("\n");
         }
       }
     }
-#line 640
+#line 403
+  if (TestDeviceSenderC__interval <= 11 - 1) {
+      TestDeviceSenderC__betaList[TestDeviceSenderC__interval] = TestDeviceSenderC__quan_beta(PSR_b);
+      TestDeviceSenderC__PSRList[TestDeviceSenderC__interval] = PSR_b;
+    }
+
   TestDeviceSenderC__m_numOfSuccess = 0;
   TestDeviceSenderC__m_numOfTransmission = 0;
   TestDeviceSenderC__TimerChgPrd__startOneShot(60000);
@@ -28195,7 +28224,7 @@ inline static void TestDeviceSenderC__Leds__led1Toggle(void ){
 #line 83
 }
 #line 83
-# 710 "TestDeviceSenderC.nc"
+# 468 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__MCPS_DATA__confirm(
 message_t *msg, 
 uint8_t msduHandle, 
@@ -28957,7 +28986,7 @@ static inline message_t *BeaconSynchronizeP__BeaconRx__received(message_t *frame
     }
 }
 
-# 746 "TestDeviceSenderC.nc"
+# 504 "TestDeviceSenderC.nc"
 static inline message_t *TestDeviceSenderC__MCPS_DATA__indication(message_t *frame)
 {
 
@@ -32261,6 +32290,33 @@ inline static error_t ScanP__RadioToken__release(void ){
 #line 137
 }
 #line 137
+# 52 "/opt/tinyos-2.1.2/tos/interfaces/Random.nc"
+inline static uint16_t TestDeviceSenderC__Random__rand16(void ){
+#line 52
+  unsigned int __nesc_result;
+#line 52
+
+#line 52
+  __nesc_result = RandomMlcgC__Random__rand16();
+#line 52
+
+#line 52
+  return __nesc_result;
+#line 52
+}
+#line 52
+# 225 "TestDeviceSenderC.nc"
+inline static uint16_t TestDeviceSenderC__getRandomNumber(void )
+#line 225
+{
+  uint16_t res = TestDeviceSenderC__Random__rand16();
+
+
+
+
+  return res;
+}
+
 # 678 "/opt/tinyos-2.1.2/tos/lib/mac/tkn154/PibP.nc"
 static inline error_t PibP__Frame__setAddressingFields(message_t *frame, 
 uint8_t srcAddrMode, 
@@ -32436,7 +32492,7 @@ inline static ieee154_status_t TestDeviceSenderC__MLME_SET__macCoordShortAddress
 #line 113
 }
 #line 113
-# 179 "TestDeviceSenderC.nc"
+# 189 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__MLME_SCAN__confirm(
 ieee154_status_t status, 
 uint8_t ScanType, 
@@ -32463,29 +32519,9 @@ ieee154_PANDescriptor_t *PANDescriptorList)
 
 
 
-      if (1 == TestDeviceSenderC__nodeType) {
-          TestDeviceSenderC__period = 32000;
-        }
-      else {
-#line 207
-        if (2 == TestDeviceSenderC__nodeType) {
-            TestDeviceSenderC__period = 32000;
-          }
-        else {
-#line 209
-          if (3 == TestDeviceSenderC__nodeType) {
-              TestDeviceSenderC__period = 32000;
-            }
-          else {
-#line 211
-            if (4 == TestDeviceSenderC__nodeType) {
-                TestDeviceSenderC__period = 32000;
-              }
-            }
-          }
-        }
-#line 215
-      TestDeviceSenderC__TimerSendPac__start(TestDeviceSenderC__period);
+
+
+      TestDeviceSenderC__TimerSendPac__start(TestDeviceSenderC__getRandomNumber());
 
       TestDeviceSenderC__TimerChgPrd__startOneShot(60000);
     }
@@ -32833,7 +32869,7 @@ static inline void CC2420TKN154P__rxControlStopDoneTask__runTask(void )
     }
 }
 
-# 114 "TestDeviceSenderC.nc"
+# 122 "TestDeviceSenderC.nc"
 static inline void TestDeviceSenderC__MLME_RESET__confirm(ieee154_status_t status)
 {
   if (status == IEEE154_SUCCESS) {
@@ -36537,9 +36573,9 @@ static inline void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__re
 }
 
 # 79 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
-inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receivedByte(uint8_t arg_0x41a4fc50, uint8_t byte){
+inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receivedByte(uint8_t arg_0x41a50990, uint8_t byte){
 #line 79
-  switch (arg_0x41a4fc50) {
+  switch (arg_0x41a50990) {
 #line 79
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 79
@@ -36549,7 +36585,7 @@ inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receivedByt
 #line 79
     default:
 #line 79
-      /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__receivedByte(arg_0x41a4fc50, byte);
+      /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__receivedByte(arg_0x41a50990, byte);
 #line 79
       break;
 #line 79
@@ -36570,9 +36606,9 @@ static inline void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__re
 }
 
 # 99 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
-inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receiveDone(uint8_t arg_0x41a4fc50, uint8_t * buf, uint16_t len, error_t error){
+inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receiveDone(uint8_t arg_0x41a50990, uint8_t * buf, uint16_t len, error_t error){
 #line 99
-  switch (arg_0x41a4fc50) {
+  switch (arg_0x41a50990) {
 #line 99
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 99
@@ -36582,7 +36618,7 @@ inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__receiveDone
 #line 99
     default:
 #line 99
-      /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__receiveDone(arg_0x41a4fc50, buf, len, error);
+      /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__receiveDone(arg_0x41a50990, buf, len, error);
 #line 99
       break;
 #line 99
@@ -36932,9 +36968,9 @@ static inline void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__se
 }
 
 # 57 "/opt/tinyos-2.1.2/tos/interfaces/UartStream.nc"
-inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__sendDone(uint8_t arg_0x41a4fc50, uint8_t * buf, uint16_t len, error_t error){
+inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__sendDone(uint8_t arg_0x41a50990, uint8_t * buf, uint16_t len, error_t error){
 #line 57
-  switch (arg_0x41a4fc50) {
+  switch (arg_0x41a50990) {
 #line 57
     case /*PlatformSerialC.UartC*/Msp430Uart1C__0__CLIENT_ID:
 #line 57
@@ -36944,7 +36980,7 @@ inline static void /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__sendDone(ui
 #line 57
     default:
 #line 57
-      /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__sendDone(arg_0x41a4fc50, buf, len, error);
+      /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__default__sendDone(arg_0x41a50990, buf, len, error);
 #line 57
       break;
 #line 57
@@ -41557,27 +41593,27 @@ static error_t /*Msp430Uart1P.UartP*/Msp430UartP__0__UartStream__send(uint8_t id
   return SUCCESS;
 }
 
-# 247 "TestDeviceSenderC.nc"
+# 248 "TestDeviceSenderC.nc"
 static void TestDeviceSenderC__printfFloat(float toBePrinted)
-#line 247
+#line 248
 {
   uint32_t fi;
-#line 248
+#line 249
   uint32_t f0;
-#line 248
+#line 249
   uint32_t f1;
-#line 248
+#line 249
   uint32_t f2;
   char c;
   float f = toBePrinted;
 
   if (f < 0) {
       c = '-';
-#line 253
+#line 254
       f = -f;
     }
   else 
-#line 254
+#line 255
     {
       c = ' ';
     }
@@ -41588,13 +41624,13 @@ static void TestDeviceSenderC__printfFloat(float toBePrinted)
 
   f = f - (float )fi;
   f0 = f * 10;
-#line 263
+#line 264
   f0 %= 10;
   f1 = f * 100;
-#line 264
+#line 265
   f1 %= 10;
   f2 = f * 1000;
-#line 265
+#line 266
   f2 %= 10;
   printf("%c%ld.%d%d%d", c, fi, (uint8_t )f0, (uint8_t )f1, 
   (uint8_t )f2);
@@ -41655,9 +41691,11 @@ static void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__clr(void )
     __nesc_atomic_end(__nesc_atomic); }
 }
 
-# 120 "TestDeviceSenderC.nc"
+# 128 "TestDeviceSenderC.nc"
 static void TestDeviceSenderC__startApp(void )
 {
+
+
   ieee154_phyChannelsSupported_t channelMask;
   uint8_t scanDuration = BEACON_ORDER;
 
@@ -42034,487 +42072,56 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__1__fireTimers(u
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__1__updateFromTimer__postTask();
 }
 
-# 270 "TestDeviceSenderC.nc"
+# 273 "TestDeviceSenderC.nc"
 static float TestDeviceSenderC__quan_beta(float PSR)
-#line 270
+#line 273
 {
 
-  if (PSR > 0.995) {
-    return 0.01;
+  uint8_t index = 0;
+
+#line 276
+  index = (uint8_t )((1.0 - PSR) * 200);
+
+  if (index > 37) {
+    return 0.5;
     }
   else {
-#line 274
-    if (PSR > 0.990) {
-      return 0.03;
-      }
-    else {
-#line 276
-      if (PSR > 0.985) {
-        return 0.06;
-        }
-      else {
-#line 278
-        if (PSR > 0.980) {
-          return 0.09;
-          }
-        else {
-#line 280
-          if (PSR > 0.975) {
-            return 0.11;
-            }
-          else {
-#line 282
-            if (PSR > 0.970) {
-              return 0.14;
-              }
-            else {
-#line 284
-              if (PSR > 0.965) {
-                return 0.16;
-                }
-              else {
-#line 286
-                if (PSR > 0.960) {
-                  return 0.18;
-                  }
-                else {
-#line 288
-                  if (PSR > 0.955) {
-                    return 0.20;
-                    }
-                  else {
-#line 290
-                    if (PSR > 0.950) {
-                      return 0.22;
-                      }
-                    else {
-#line 292
-                      if (PSR > 0.945) {
-                        return 0.23;
-                        }
-                      else {
-#line 294
-                        if (PSR > 0.940) {
-                          return 0.25;
-                          }
-                        else {
-#line 296
-                          if (PSR > 0.935) {
-                            return 0.27;
-                            }
-                          else {
-#line 298
-                            if (PSR > 0.930) {
-                              return 0.28;
-                              }
-                            else {
-#line 300
-                              if (PSR > 0.925) {
-                                return 0.30;
-                                }
-                              else {
-#line 302
-                                if (PSR > 0.920) {
-                                  return 0.31;
-                                  }
-                                else {
-#line 304
-                                  if (PSR > 0.915) {
-                                    return 0.32;
-                                    }
-                                  else {
-#line 306
-                                    if (PSR > 0.910) {
-                                      return 0.33;
-                                      }
-                                    else {
-#line 308
-                                      if (PSR > 0.905) {
-                                        return 0.34;
-                                        }
-                                      else {
-#line 310
-                                        if (PSR > 0.900) {
-                                          return 0.36;
-                                          }
-                                        else {
-#line 312
-                                          if (PSR > 0.895) {
-                                            return 0.37;
-                                            }
-                                          else {
-#line 314
-                                            if (PSR > 0.890) {
-                                              return 0.38;
-                                              }
-                                            else {
-#line 316
-                                              if (PSR > 0.885) {
-                                                return 0.39;
-                                                }
-                                              else {
-#line 318
-                                                if (PSR > 0.880) {
-                                                  return 0.40;
-                                                  }
-                                                else {
-#line 320
-                                                  if (PSR > 0.875) {
-                                                    return 0.40;
-                                                    }
-                                                  else {
-#line 322
-                                                    if (PSR > 0.870) {
-                                                      return 0.41;
-                                                      }
-                                                    else {
-#line 324
-                                                      if (PSR > 0.865) {
-                                                        return 0.42;
-                                                        }
-                                                      else {
-#line 326
-                                                        if (PSR > 0.860) {
-                                                          return 0.43;
-                                                          }
-                                                        else {
-#line 328
-                                                          if (PSR > 0.855) {
-                                                            return 0.44;
-                                                            }
-                                                          else {
-#line 330
-                                                            if (PSR > 0.850) {
-                                                              return 0.44;
-                                                              }
-                                                            else {
-#line 332
-                                                              if (PSR > 0.845) {
-                                                                return 0.45;
-                                                                }
-                                                              else {
-#line 334
-                                                                if (PSR > 0.840) {
-                                                                  return 0.46;
-                                                                  }
-                                                                else {
-#line 336
-                                                                  if (PSR > 0.835) {
-                                                                    return 0.47;
-                                                                    }
-                                                                  else {
-#line 338
-                                                                    if (PSR > 0.830) {
-                                                                      return 0.47;
-                                                                      }
-                                                                    else {
-#line 340
-                                                                      if (PSR > 0.825) {
-                                                                        return 0.48;
-                                                                        }
-                                                                      else {
-#line 342
-                                                                        if (PSR > 0.820) {
-                                                                          return 0.48;
-                                                                          }
-                                                                        else {
-#line 344
-                                                                          if (PSR > 0.815) {
-                                                                            return 0.49;
-                                                                            }
-                                                                          else {
-#line 346
-                                                                            if (PSR > 0.810) {
-                                                                              return 0.50;
-                                                                              }
-                                                                            else {
-#line 348
-                                                                              if (PSR > 0.805) {
-                                                                                return 0.50;
-                                                                                }
-                                                                              else {
-#line 350
-                                                                                if (PSR > 0.800) {
-                                                                                  return 0.50;
-                                                                                  }
-                                                                                else {
-#line 353
-                                                                                  return 0.60;
-                                                                                  }
-                                                                                }
-                                                                              }
-                                                                            }
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    }
-                                                                  }
-                                                                }
-                                                              }
-                                                            }
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+#line 281
+    return TestDeviceSenderC__betaTable[index];
     }
 }
 
-#line 481
+#line 299
 static float TestDeviceSenderC__fromBetaToTraffic(float beta)
-#line 481
+#line 299
 {
   return beta / (1 - beta * beta * beta * beta * beta) / 6.0;
 }
 
-#line 357
+#line 288
 static float TestDeviceSenderC__quan_opt_beta(float traffic)
-#line 357
+#line 288
 {
-  if (traffic < 0.0025) {
-    return 0.01;
+
+  uint8_t index = 0;
+
+#line 291
+  index = (uint8_t )(traffic * 400);
+  if (index > 32) {
+    return 0.6;
     }
   else {
-#line 360
-    if (traffic < 0.0050) {
-      return 0.01;
-      }
-    else {
-#line 362
-      if (traffic < 0.0075) {
-        return 0.01;
-        }
-      else {
-#line 364
-        if (traffic < 0.0100) {
-          return 0.01;
-          }
-        else {
-#line 366
-          if (traffic < 0.0125) {
-            return 0.02;
-            }
-          else {
-#line 368
-            if (traffic < 0.0150) {
-              return 0.04;
-              }
-            else {
-#line 370
-              if (traffic < 0.0175) {
-                return 0.05;
-                }
-              else {
-#line 372
-                if (traffic < 0.0200) {
-                  return 0.07;
-                  }
-                else {
-#line 374
-                  if (traffic < 0.0225) {
-                    return 0.08;
-                    }
-                  else {
-#line 376
-                    if (traffic < 0.0250) {
-                      return 0.10;
-                      }
-                    else {
-#line 378
-                      if (traffic < 0.0275) {
-                        return 0.11;
-                        }
-                      else {
-#line 380
-                        if (traffic < 0.0300) {
-                          return 0.13;
-                          }
-                        else {
-#line 382
-                          if (traffic < 0.0325) {
-                            return 0.14;
-                            }
-                          else {
-#line 384
-                            if (traffic < 0.0350) {
-                              return 0.16;
-                              }
-                            else {
-#line 386
-                              if (traffic < 0.0375) {
-                                return 0.18;
-                                }
-                              else {
-#line 388
-                                if (traffic < 0.0400) {
-                                  return 0.19;
-                                  }
-                                else {
-#line 390
-                                  if (traffic < 0.0425) {
-                                    return 0.21;
-                                    }
-                                  else {
-#line 392
-                                    if (traffic < 0.0450) {
-                                      return 0.23;
-                                      }
-                                    else {
-#line 394
-                                      if (traffic < 0.0475) {
-                                        return 0.24;
-                                        }
-                                      else {
-#line 396
-                                        if (traffic < 0.0500) {
-                                          return 0.26;
-                                          }
-                                        else {
-#line 398
-                                          if (traffic < 0.0525) {
-                                            return 0.28;
-                                            }
-                                          else {
-#line 400
-                                            if (traffic < 0.0550) {
-                                              return 0.29;
-                                              }
-                                            else {
-#line 402
-                                              if (traffic < 0.0575) {
-                                                return 0.31;
-                                                }
-                                              else {
-#line 404
-                                                if (traffic < 0.0600) {
-                                                  return 0.33;
-                                                  }
-                                                else {
-#line 406
-                                                  if (traffic < 0.0625) {
-                                                    return 0.35;
-                                                    }
-                                                  else {
-#line 408
-                                                    if (traffic < 0.0650) {
-                                                      return 0.37;
-                                                      }
-                                                    else {
-#line 410
-                                                      if (traffic < 0.0675) {
-                                                        return 0.39;
-                                                        }
-                                                      else {
-#line 412
-                                                        if (traffic < 0.0700) {
-                                                          return 0.41;
-                                                          }
-                                                        else {
-#line 414
-                                                          if (traffic < 0.0725) {
-                                                            return 0.43;
-                                                            }
-                                                          else {
-#line 416
-                                                            if (traffic < 0.0750) {
-                                                              return 0.46;
-                                                              }
-                                                            else {
-#line 418
-                                                              if (traffic < 0.0775) {
-                                                                return 0.48;
-                                                                }
-                                                              else {
-#line 420
-                                                                if (traffic < 0.0800) {
-                                                                  return 0.51;
-                                                                  }
-                                                                else {
-#line 422
-                                                                  if (traffic < 0.0825) {
-                                                                    return 0.55;
-                                                                    }
-                                                                  else {
-#line 424
-                                                                    if (traffic < 0.0850) {
-                                                                      return 0.61;
-                                                                      }
-                                                                    else {
-#line 426
-                                                                      if (traffic < 0.0875) {
-                                                                        return 0.8;
-                                                                        }
-                                                                      else {
-#line 428
-                                                                        if (traffic < 0.0900) {
-                                                                          return 0.8;
-                                                                          }
-                                                                        else {
-#line 431
-                                                                          return 0.8;
-                                                                          }
-                                                                        }
-                                                                      }
-                                                                    }
-                                                                  }
-                                                                }
-                                                              }
-                                                            }
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+#line 295
+    return TestDeviceSenderC__optBetaTable[index];
     }
 }
 
-#line 532
+
+
+
+
 static float TestDeviceSenderC__findOptimalDelta(float beta, float traffic, float PSR)
-#line 532
+#line 303
 {
   return beta / (1 - beta * beta * beta * beta * beta) / traffic / 6.0 > 1.0 / PSR ? beta / (1 - beta * beta * beta * beta * beta) / traffic / 6.0 : 1.0 / PSR;
 }
@@ -42883,7 +42490,7 @@ static message_t */*TKN154BeaconEnabledP.DeviceCap*/DispatchSlottedCsmaP__0__Fra
 #line 43
 }
 #line 43
-# 730 "TestDeviceSenderC.nc"
+# 488 "TestDeviceSenderC.nc"
 static void TestDeviceSenderC__MLME_SYNC_LOSS__indication(
 ieee154_status_t lossReason, 
 uint16_t PANId, 
@@ -43040,7 +42647,7 @@ static ieee154_status_t PibP__MLME_SET__phyCurrentChannel(ieee154_phyCurrentChan
   return IEEE154_SUCCESS;
 }
 
-# 150 "TestDeviceSenderC.nc"
+# 160 "TestDeviceSenderC.nc"
 static message_t *TestDeviceSenderC__MLME_BEACON_NOTIFY__indication(message_t *frame)
 {
 
@@ -43051,13 +42658,13 @@ static message_t *TestDeviceSenderC__MLME_BEACON_NOTIFY__indication(message_t *f
 
 
       if (
-#line 158
+#line 168
       TestDeviceSenderC__BeaconFrame__parsePANDescriptor(
       frame, RADIO_CHANNEL, page, &TestDeviceSenderC__m_PANDescriptor) == SUCCESS) {
 
 
           if (
-#line 161
+#line 171
           TestDeviceSenderC__m_PANDescriptor.CoordAddrMode == ADDR_MODE_SHORT_ADDRESS && 
           TestDeviceSenderC__m_PANDescriptor.CoordPANId == PAN_ID && 
           TestDeviceSenderC__m_PANDescriptor.CoordAddress.shortAddress == COORDINATOR_ADDRESS) {
@@ -43067,14 +42674,14 @@ static message_t *TestDeviceSenderC__MLME_BEACON_NOTIFY__indication(message_t *f
         }
     }
   else 
-#line 168
+#line 178
     {
 
       if (beaconSequenceNumber & 1) {
         TestDeviceSenderC__Leds__led2On();
         }
       else {
-#line 173
+#line 183
         TestDeviceSenderC__Leds__led2Off();
         }
     }
@@ -43740,12 +43347,16 @@ static error_t SerialP__SplitControl__start(void )
   return SUCCESS;
 }
 
-# 101 "TestDeviceSenderC.nc"
+# 107 "TestDeviceSenderC.nc"
 static void TestDeviceSenderC__Boot__booted(void )
-#line 101
+#line 107
 {
   char payload[3] = "He";
   uint8_t *payloadRegion;
+
+#line 110
+  TestDeviceSenderC__period = 16000 * TestDeviceSenderC__nodeType + 16000;
+  TestDeviceSenderC__thu = 16000 * TestDeviceSenderC__nodeType + 16000;
 
   TestDeviceSenderC__m_payloadLen = strlen(payload);
   payloadRegion = TestDeviceSenderC__MACPacket__getPayload(&TestDeviceSenderC__m_frame, TestDeviceSenderC__m_payloadLen);
