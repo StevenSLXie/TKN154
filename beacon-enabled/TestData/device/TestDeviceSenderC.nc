@@ -107,8 +107,10 @@ module TestDeviceSenderC
   event void Boot.booted() {
     char payload[] = "He";
     uint8_t *payloadRegion;
-	period = 16000*nodeType+16000;
-	thu = 16000*nodeType+16000;
+	//period = 16000*nodeType+16000;
+	//thu = 16000*nodeType+16000;
+	period = 3.2*20000;
+	thu = 3.2*20000;
 
     m_payloadLen = strlen(payload);
     payloadRegion = call MACPacket.getPayload(&m_frame, m_payloadLen);
@@ -306,13 +308,13 @@ module TestDeviceSenderC
   
   event void TimerChgPrd.fired(){
     float PSR_b = 0;
-	/*
-	if(timerFlag < 3){
+	
+	if(timerFlag < 2){
 		timerFlag++;
 		call TimerChgPrd.startOneShot(60000);
 		return;
 	}
-	*/
+	
 	
 	++interval;
 	
@@ -340,7 +342,7 @@ module TestDeviceSenderC
 
 	}
 	
-	else if((m_PSR - PSR_b)>=0.02){
+	else if((m_PSR - PSR_b)>=0.09){
 		float curTraf = 0;
 		m_PSR = PSR_b;  // calculate the PSR
 		atomic{
@@ -368,7 +370,7 @@ module TestDeviceSenderC
 
 	
 	}
-	else if((PSR_b - m_PSR)>=0.02){
+	else if((PSR_b - m_PSR)>=0.09){
 		m_PSR = PSR_b;  // calculate the PSR
 		atomic{
 			m_beta = quan_beta(m_PSR);
@@ -396,13 +398,13 @@ module TestDeviceSenderC
 		printf("Nothing changes.\nThe current beta and PSR and period are:");
 		printfFloat(quan_beta(PSR_b));
 		printfFloat(PSR_b);
-		printf(" %d",period);
+		printf(" %u",period);
 		printf("\n");
 	}
 	
-	if(interval<=LIST_LEN-1){
-		betaList[interval] = quan_beta(PSR_b);
-		PSRList[interval] = PSR_b;
+	if(interval<=LIST_LEN){
+		betaList[interval-1] = quan_beta(PSR_b);
+		PSRList[interval-1] = PSR_b;
 	}
 	
 	m_numOfSuccess = 0;
@@ -440,8 +442,8 @@ module TestDeviceSenderC
   task void packetSendTask()
   {
     if (!m_wasScanSuccessful){
-	  call Leds.led0On();
-	  call TimerSendPac.stop();
+	  //call Leds.led0On();
+	  //call TimerSendPac.stop();
 	  startApp();
       return;
 	  }
@@ -451,15 +453,15 @@ module TestDeviceSenderC
           0,                                // msduHandle,
           TX_OPTIONS_ACK // TxOptions,
           ) != IEEE154_SUCCESS){
-	  //trans2++;
-      call Leds.led0On();
-	  call TimerSendPac.stop();
+
+      //call Leds.led0On();
+	  ++m_numOfTransmission;
+	  
 	
 	}
 	else{
 		call Leds.led0Off();
 		++m_numOfTransmission;
-		//trans2++;
 	}
 
 	
@@ -478,7 +480,7 @@ module TestDeviceSenderC
 	  if(m_numOfTransmission%100 == 0){
 		post sendToSerial();
 	  }
-	  //m_ledCount = 0;
+
 	
     }
 	
@@ -496,8 +498,8 @@ module TestDeviceSenderC
     call Leds.led1Off();
     call Leds.led2Off();
 	call Leds.led0On();
-	call TimerSendPac.stop();
-	call TimerChgPrd.stop();
+	//call TimerSendPac.stop();
+	//call TimerChgPrd.stop();
 	startApp();
   }
 
